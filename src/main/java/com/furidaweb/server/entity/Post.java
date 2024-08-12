@@ -6,10 +6,9 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@Entity
 @Getter
 @Setter
-@Table(name = "posts")
+@Entity
 public class Post {
 
     @Id

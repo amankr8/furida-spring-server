@@ -44,7 +44,7 @@ public class PostController {
     }
 
     @DeleteMapping
-    public void deletePosts() {
+    public void deleteAllPosts() {
         postService.deleteAllPosts();
     }
 }
