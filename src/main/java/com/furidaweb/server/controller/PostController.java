@@ -2,11 +2,13 @@ package com.furidaweb.server.controller;
 
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.service.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @RequestMapping("/posts")
 @RestController
@@ -14,10 +16,6 @@ public class PostController {
 
     @Autowired
     private final PostService postService;
-
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
 
     @GetMapping
     public List<Post> getAllPosts() {

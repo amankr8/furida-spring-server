@@ -2,19 +2,17 @@ package com.furidaweb.server.service;
 
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-
-    public PostServiceImpl(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
 
     @Override
     public List<Post> getAllPosts() {
