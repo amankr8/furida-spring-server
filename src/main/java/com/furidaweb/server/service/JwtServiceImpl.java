@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtServiceImpl implements JwtService {
 
-    private final String SECRET_KEY = "z5d0yUreaHdj1VOcqySVzhaTJxehArAX";
+    private final String SECRET_KEY = "3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b";
     private final Long jwtExpiration = 1000L * 60 * 24;
 
     @Override

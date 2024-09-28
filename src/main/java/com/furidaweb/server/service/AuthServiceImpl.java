@@ -21,9 +21,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public User signUp(SignUpUserDto input) {
         User user = new User();
-        user.setUsername(input.getUsername());
         user.setEmail(input.getEmail());
+        user.setUsername(input.getUsername());
         user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setRole(input.getRole());
 
         return userRepository.save(user);
     }
