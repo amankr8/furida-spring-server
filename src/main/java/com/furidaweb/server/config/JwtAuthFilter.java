@@ -1,6 +1,7 @@
 package com.furidaweb.server.config;
 
 import com.furidaweb.server.service.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -57,8 +58,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 filterChain.doFilter(request, response);
             }
+        } catch (ExpiredJwtException e) {
+            // Token is expired
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token has expired. Please sign in again.");
+            response.getWriter().flush();
         } catch (Exception e) {
-            handlerExceptionResolver.resolveException(request, response, null, e);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Invalid token.");
+            response.getWriter().flush();
         }
     }
 }

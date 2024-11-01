@@ -7,6 +7,7 @@ import com.furidaweb.server.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,15 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User signUp(SignUpUserDto input) {
+        // Check if the user already exists by username or email
+        if (userRepository.findByUsername(input.getUsername()).isPresent()) {
+            throw new IllegalArgumentException("Username already exists");
+        }
+
+        if (userRepository.findByEmail(input.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+
         User user = new User();
         user.setEmail(input.getEmail());
         user.setUsername(input.getUsername());
@@ -32,10 +42,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public User signIn(SignInUserDto input) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        input.getUsername(),
-                        input.getPassword()
-                )
+            new UsernamePasswordAuthenticationToken(
+                    input.getUsername(),
+                    input.getPassword()
+            )
         );
 
         return userRepository.findByUsername(input.getUsername()).orElseThrow();
