@@ -1,9 +1,7 @@
 package com.furidaweb.server.controller;
 
-import com.furidaweb.server.entity.User;
-import com.furidaweb.server.service.UserService;
+import com.furidaweb.server.entity.Role;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,15 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/roles")
 @RestController
-public class UserController {
-
-    @Autowired
-    private final UserService userService;
+public class RoleController {
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public List<Role> getAllRoles() {
+        return List.of(Role.values());
     }
 }
