@@ -26,12 +26,24 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpUserDto signUpUserDto) {
         try {
             authService.signUp(signUpUserDto);
-            return ResponseEntity.status(HttpStatus.OK).body("User registered.");
+            AuthResponse authResponse = AuthResponse.builder()
+                    .message("User registered.")
+                    .build();
+
+            return ResponseEntity.ok(authResponse);
         } catch (IllegalArgumentException e) {
             // Handle the case where the username or email already exists
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            AuthResponse authResponse = AuthResponse.builder()
+                    .message(e.getMessage())
+                    .build();
+
+            return ResponseEntity.badRequest().body(authResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            AuthResponse authResponse = AuthResponse.builder()
+                    .message(e.getMessage())
+                    .build();
+
+            return ResponseEntity.internalServerError().body(authResponse);
         }
     }
 
@@ -47,7 +59,11 @@ public class AuthController {
 
             return ResponseEntity.ok(authResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+            AuthResponse authResponse = AuthResponse.builder()
+                    .message(e.getMessage())
+                    .build();
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authResponse);
         }
     }
 }
