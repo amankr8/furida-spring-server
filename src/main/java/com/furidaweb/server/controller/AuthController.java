@@ -6,22 +6,25 @@ import com.furidaweb.server.dto.SignUpUserDto;
 import com.furidaweb.server.entity.User;
 import com.furidaweb.server.service.AuthService;
 import com.furidaweb.server.service.JwtService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 @RestController
+@Validated
 public class AuthController {
 
     private final JwtService jwtService;
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@RequestBody SignUpUserDto signUpUserDto) {
+    public ResponseEntity<?> register(@Valid @RequestBody SignUpUserDto signUpUserDto) {
         try {
             authService.signUp(signUpUserDto);
             return ResponseEntity.ok("User registered successfully!");
@@ -34,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticate(@RequestBody SignInUserDto signInUserDto) {
+    public ResponseEntity<?> authenticate(@Valid @RequestBody SignInUserDto signInUserDto) {
         try {
             User authenticatedUser = authService.signIn(signInUserDto);
             String jwtToken = jwtService.generateToken(authenticatedUser);
