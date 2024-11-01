@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 @RequestMapping("/posts")
 @RestController
 public class PostController {

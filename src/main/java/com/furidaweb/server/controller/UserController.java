@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 @RequestMapping("/users")
 @RestController
 public class UserController {
