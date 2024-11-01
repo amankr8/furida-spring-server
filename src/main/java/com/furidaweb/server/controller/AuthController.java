@@ -24,10 +24,10 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@Valid @RequestBody SignUpUserDto signUpUserDto) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpUserDto signUpUserDto) {
         try {
             authService.signUp(signUpUserDto);
-            return ResponseEntity.ok("User registered successfully!");
+            return ResponseEntity.status(HttpStatus.OK).body("User registered.");
         } catch (IllegalArgumentException e) {
             // Handle the case where the username or email already exists
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -36,8 +36,8 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity<?> authenticate(@Valid @RequestBody SignInUserDto signInUserDto) {
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody SignInUserDto signInUserDto) {
         try {
             User authenticatedUser = authService.signIn(signInUserDto);
             String jwtToken = jwtService.generateToken(authenticatedUser);
