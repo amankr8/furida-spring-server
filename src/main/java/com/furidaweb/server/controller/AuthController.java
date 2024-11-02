@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,12 +61,24 @@ public class AuthController {
                     .build();
 
             return ResponseEntity.ok(authResponse);
+        } catch (UsernameNotFoundException e) {
+            AuthResponse authResponse = AuthResponse.builder()
+                    .message(e.getMessage())
+                    .build();
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(authResponse);
+        } catch (BadCredentialsException e) {
+            AuthResponse authResponse = AuthResponse.builder()
+                    .message("Invalid credentials")
+                    .build();
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authResponse);
         } catch (Exception e) {
             AuthResponse authResponse = AuthResponse.builder()
                     .message(e.getMessage())
                     .build();
 
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authResponse);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(authResponse);
         }
     }
 }

@@ -41,13 +41,15 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User signIn(SignInUserDto input) {
+        User user = userRepository.findByUsername(input.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
                     input.getUsername(),
                     input.getPassword()
             )
         );
-
-        return userRepository.findByUsername(input.getUsername()).orElseThrow();
+        return user;
     }
 }
