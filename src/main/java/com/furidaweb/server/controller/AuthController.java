@@ -27,7 +27,7 @@ public class AuthController {
         try {
             authService.signUp(signUpUserDto);
             AuthResponse authResponse = AuthResponse.builder()
-                    .message("User registered.")
+                    .message("User registered successfully!")
                     .build();
 
             return ResponseEntity.ok(authResponse);
@@ -55,6 +55,7 @@ public class AuthController {
 
             AuthResponse authResponse = AuthResponse.builder()
                     .token(jwtToken)
+                    .message("Login successful!")
                     .build();
 
             return ResponseEntity.ok(authResponse);

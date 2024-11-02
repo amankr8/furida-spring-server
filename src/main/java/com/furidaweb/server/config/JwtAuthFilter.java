@@ -1,5 +1,7 @@
 package com.furidaweb.server.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.furidaweb.server.dto.AuthResponse;
 import com.furidaweb.server.service.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -15,15 +17,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 
 @RequiredArgsConstructor
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
-    private final HandlerExceptionResolver handlerExceptionResolver;
-
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
@@ -60,12 +59,22 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
         } catch (ExpiredJwtException e) {
             // Token is expired
+            AuthResponse authResponse = AuthResponse.builder()
+                    .message("Token has expired. Please sign in again.")
+                    .build();
+
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Token has expired. Please sign in again.");
+            response.setContentType("application/json");
+            response.getWriter().write(new ObjectMapper().writeValueAsString(authResponse));
             response.getWriter().flush();
         } catch (Exception e) {
+            AuthResponse authResponse = AuthResponse.builder()
+                    .message("Invalid token.")
+                    .build();
+
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Invalid token.");
+            response.setContentType("application/json");
+            response.getWriter().write(new ObjectMapper().writeValueAsString(authResponse));
             response.getWriter().flush();
         }
     }
