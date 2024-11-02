@@ -39,13 +39,13 @@ public class AuthController {
                     .message(e.getMessage())
                     .build();
 
-            return ResponseEntity.badRequest().body(authResponse);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(authResponse);
         } catch (Exception e) {
             AuthResponse authResponse = AuthResponse.builder()
                     .message(e.getMessage())
                     .build();
 
-            return ResponseEntity.internalServerError().body(authResponse);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(authResponse);
         }
     }
 
