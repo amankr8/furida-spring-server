@@ -77,6 +77,7 @@ public class PostServiceImpl implements PostService {
         // Delete the associated image file if it exists
         String imgPath = post.getImgPath();
         if (imgPath != null) {
+            // Delete image file if it exists
             Path filePath = Paths.get(imgPath);
             Files.deleteIfExists(filePath);
             System.out.println("Deleted image: " + filePath);
@@ -88,13 +89,15 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deleteAllPosts() throws IOException {
         List<Post> allPosts = postRepository.findAll();
+
+        // Delete all the associated image files
         List<String> imgPaths = allPosts.stream()
                 .map(Post::getImgPath).filter(Objects::nonNull).toList();
-
         for (String imgPath : imgPaths) {
             // Delete image file if it exists
             Path filePath = Paths.get(imgPath);
             Files.deleteIfExists(filePath);
+            System.out.println("Deleted image: " + filePath);
         }
 
         postRepository.deleteAll();
