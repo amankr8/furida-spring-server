@@ -1,7 +1,9 @@
 package com.furidaweb.server.service;
 
+import com.furidaweb.server.dto.CreatePostDto;
 import com.furidaweb.server.entity.Post;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface PostService {
@@ -10,7 +12,7 @@ public interface PostService {
 
     Post getPostById(int id);
 
-    Post createPost(Post post);
+    Post createPost(CreatePostDto post) throws IOException;
 
     Post updatePost(int id, Post post);
 

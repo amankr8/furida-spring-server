@@ -1,11 +1,13 @@
 package com.furidaweb.server.controller;
 
+import com.furidaweb.server.dto.CreatePostDto;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class PostController {
     }
 
     @PostMapping
-    public Post createPost(@RequestBody Post post) {
+    public Post createPost(@ModelAttribute CreatePostDto post) throws IOException {
         return postService.createPost(post);
     }
 

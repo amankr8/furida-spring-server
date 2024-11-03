@@ -10,8 +10,6 @@ public interface UserService {
 
     User getUserById(int id);
 
-    User registerUser(User user);
-
     User updateUserDetails(int id, User user);
 
     void deleteUserById(int id);
