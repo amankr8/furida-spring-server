@@ -1,7 +1,5 @@
 package com.furidaweb.server.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.furidaweb.server.dto.AuthResponse;
 import com.furidaweb.server.service.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
