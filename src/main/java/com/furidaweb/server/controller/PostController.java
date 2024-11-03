@@ -2,9 +2,12 @@ package com.furidaweb.server.controller;
 
 import com.furidaweb.server.dto.CreatePostDto;
 import com.furidaweb.server.entity.Post;
+import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -29,22 +32,46 @@ public class PostController {
     }
 
     @PostMapping
-    public Post createPost(@ModelAttribute CreatePostDto post) throws IOException {
-        return postService.createPost(post);
+    public ResponseEntity<?> createPost(@ModelAttribute CreatePostDto post) {
+        try {
+            Post newPost = postService.createPost(post);
+            return ResponseEntity.ok(newPost);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public Post updatePost(@PathVariable int id, @RequestBody Post post) {
-        return postService.updatePost(id, post);
+    public ResponseEntity<?> updatePost(@PathVariable int id, @RequestBody Post post) {
+        try {
+            Post updatedPost = postService.updatePost(id, post);
+            return ResponseEntity.ok(updatedPost);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable int id) {
-        postService.deletePost(id);
+    public ResponseEntity<?> deletePost(@PathVariable int id) {
+        try {
+            postService.deletePost(id);
+            return ResponseEntity.ok("Post deleted successfully!");
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @DeleteMapping
-    public void deleteAllPosts() {
-        postService.deleteAllPosts();
+    public ResponseEntity<?> deleteAllPosts() {
+        try {
+            postService.deleteAllPosts();
+            return ResponseEntity.ok("All Posts deleted successfully!");
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

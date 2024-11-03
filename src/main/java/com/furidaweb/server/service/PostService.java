@@ -16,7 +16,7 @@ public interface PostService {
 
     Post updatePost(int id, Post post);
 
-    void deletePost(int id);
+    void deletePost(int id) throws IOException;
 
-    void deleteAllPosts();
+    void deleteAllPosts() throws IOException;
 }
