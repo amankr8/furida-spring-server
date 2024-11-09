@@ -18,5 +18,5 @@ public class Post {
     private String title;
     private String content;
     private Date date;
-    private String imgPath;
+    private String imgUrl;
 }

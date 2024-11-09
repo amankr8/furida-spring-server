@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService {
         return postRepository.findById(id).orElse(null);
     }
 
-    private String saveImage(MultipartFile file) throws IOException {
+    private String uploadFile(MultipartFile file) throws IOException {
         String baseFilePath = "uploads/posts/";
         String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
         Path filePath = Paths.get(baseFilePath + fileName);
@@ -53,7 +53,7 @@ public class PostServiceImpl implements PostService {
         newPost.setDate(new Date());
 
         if (post.getFile() != null) {
-            newPost.setImgPath(saveImage(post.getFile()));
+            newPost.setImgUrl(uploadFile(post.getFile()));
         }
         return postRepository.save(newPost);
     }
@@ -75,7 +75,7 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 
         // Delete the associated image file if it exists
-        String imgPath = post.getImgPath();
+        String imgPath = post.getImgUrl();
         if (imgPath != null) {
             // Delete image file if it exists
             Path filePath = Paths.get(imgPath);
@@ -92,7 +92,7 @@ public class PostServiceImpl implements PostService {
 
         // Delete all the associated image files
         List<String> imgPaths = allPosts.stream()
-                .map(Post::getImgPath).filter(Objects::nonNull).toList();
+                .map(Post::getImgUrl).filter(Objects::nonNull).toList();
         for (String imgPath : imgPaths) {
             // Delete image file if it exists
             Path filePath = Paths.get(imgPath);
