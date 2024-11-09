@@ -1,5 +1,7 @@
 package com.furidaweb.server.service;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.furidaweb.server.dto.PostDto;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.exception.ResourceNotFoundException;
@@ -8,21 +10,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final Cloudinary cloudinary;
 
     @Override
     public List<Post> getAllPosts() {
@@ -34,19 +29,15 @@ public class PostServiceImpl implements PostService {
         return postRepository.findById(id).orElse(null);
     }
 
-    private String uploadFile(MultipartFile file) throws IOException {
-        String baseFilePath = "uploads/posts/";
-        String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-        Path filePath = Paths.get(baseFilePath + fileName);
+    private String uploadFile(MultipartFile file) throws Exception {
+        Map params = ObjectUtils.asMap();
+        Map result = cloudinary.uploader().upload(file.getBytes(), params);
 
-        Files.createDirectories(filePath.getParent()); // Create directories if they don’t exist
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        return filePath.toString();
+        return result.get("url").toString();
     }
 
     @Override
-    public Post createPost(PostDto post) throws IOException {
+    public Post createPost(PostDto post) throws Exception {
         Post newPost = new Post();
         newPost.setTitle(post.getTitle());
         newPost.setContent(post.getContent());
@@ -70,36 +61,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deletePost(int id) throws IOException {
-        Post post = postRepository.findById(id)
+    public void deletePost(int id) {
+        postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
-
-        // Delete the associated image file if it exists
-        String imgPath = post.getImgUrl();
-        if (imgPath != null) {
-            // Delete image file if it exists
-            Path filePath = Paths.get(imgPath);
-            Files.deleteIfExists(filePath);
-            System.out.println("Deleted image: " + filePath);
-        }
 
         postRepository.deleteById(id);
     }
 
     @Override
-    public void deleteAllPosts() throws IOException {
-        List<Post> allPosts = postRepository.findAll();
-
-        // Delete all the associated image files
-        List<String> imgPaths = allPosts.stream()
-                .map(Post::getImgUrl).filter(Objects::nonNull).toList();
-        for (String imgPath : imgPaths) {
-            // Delete image file if it exists
-            Path filePath = Paths.get(imgPath);
-            Files.deleteIfExists(filePath);
-            System.out.println("Deleted image: " + filePath);
-        }
-
+    public void deleteAllPosts() {
         postRepository.deleteAll();
     }
 }
