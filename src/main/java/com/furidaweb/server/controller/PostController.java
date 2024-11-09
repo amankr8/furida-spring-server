@@ -1,6 +1,7 @@
 package com.furidaweb.server.controller;
 
 import com.furidaweb.server.dto.CreatePostDto;
+import com.furidaweb.server.dto.ErrorResponse;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.service.PostService;
@@ -36,8 +37,9 @@ public class PostController {
         try {
             Post newPost = postService.createPost(post);
             return ResponseEntity.ok(newPost);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
         }
     }
 
@@ -47,7 +49,11 @@ public class PostController {
             Post updatedPost = postService.updatePost(id, post);
             return ResponseEntity.ok(updatedPost);
         } catch (ResourceNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
         }
     }
 
@@ -57,9 +63,11 @@ public class PostController {
             postService.deletePost(id);
             return ResponseEntity.ok("Post deleted successfully!");
         } catch (ResourceNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
         }
     }
 
@@ -68,10 +76,9 @@ public class PostController {
         try {
             postService.deleteAllPosts();
             return ResponseEntity.ok("All Posts deleted successfully!");
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
         }
     }
 }

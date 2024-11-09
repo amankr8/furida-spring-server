@@ -27,25 +27,16 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpUserDto signUpUserDto) {
         try {
-            authService.signUp(signUpUserDto);
-            AuthResponse authResponse = AuthResponse.builder()
-                    .message("User registered successfully!")
-                    .build();
-
-            return ResponseEntity.ok(authResponse);
+            User registeredUser = authService.signUp(signUpUserDto);
+            String jwtToken = jwtService.generateToken(registeredUser);
+            return ResponseEntity.ok(new AuthResponse(jwtToken, "User registered successfully!"));
         } catch (IllegalArgumentException e) {
             // Handle the case where the username or email already exists
-            AuthResponse authResponse = AuthResponse.builder()
-                    .message(e.getMessage())
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(authResponse);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new AuthResponse(null, e.getMessage()));
         } catch (Exception e) {
-            AuthResponse authResponse = AuthResponse.builder()
-                    .message(e.getMessage())
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(authResponse);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new AuthResponse(null, e.getMessage()));
         }
     }
 
@@ -54,31 +45,16 @@ public class AuthController {
         try {
             User authenticatedUser = authService.signIn(signInUserDto);
             String jwtToken = jwtService.generateToken(authenticatedUser);
-
-            AuthResponse authResponse = AuthResponse.builder()
-                    .token(jwtToken)
-                    .message("Login successful!")
-                    .build();
-
-            return ResponseEntity.ok(authResponse);
+            return ResponseEntity.ok(new AuthResponse(jwtToken, "Login successful!"));
         } catch (UsernameNotFoundException e) {
-            AuthResponse authResponse = AuthResponse.builder()
-                    .message(e.getMessage())
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(authResponse);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new AuthResponse(null, e.getMessage()));
         } catch (BadCredentialsException e) {
-            AuthResponse authResponse = AuthResponse.builder()
-                    .message("Invalid credentials")
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authResponse);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new AuthResponse(null, "Invalid credentials"));
         } catch (Exception e) {
-            AuthResponse authResponse = AuthResponse.builder()
-                    .message(e.getMessage())
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(authResponse);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new AuthResponse(null, e.getMessage()));
         }
     }
 }

@@ -10,5 +10,16 @@ spring:
     hibernate:
       ddl-auto: update
 
+  web:
+    resources:
+      static-locations: file:uploads/
+
 jwt:
   secret: d829cdbf49f27fd8db229bc3d8304663d271bab133c86b6166311bba63310a40
+
+fileStorage:
+  url: https://ik.imagekit.io/amankr8
+  public:
+    key: public_hYgda4V2wjE63zhaiHmbqq9Vsy0=
+  private:
+    key: private_R+aNvrlyIqr15b32eAomtWg8PGg=
