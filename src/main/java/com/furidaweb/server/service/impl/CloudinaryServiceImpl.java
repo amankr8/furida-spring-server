@@ -19,8 +19,11 @@ public class CloudinaryServiceImpl implements CloudinaryService {
 
     public Map<String, String> uploadFile(MultipartFile file) {
         Map<String, String> uploadedFile = new HashMap<>();
+        String uploadFolder = "furida/posts";
         try {
-            Map params = ObjectUtils.asMap();
+            Map params = ObjectUtils.asMap(
+                    "folder", uploadFolder
+            );
             Map result = cloudinary.uploader().upload(file.getBytes(), params);
 
             uploadedFile.put("public_id", result.get("public_id").toString());
