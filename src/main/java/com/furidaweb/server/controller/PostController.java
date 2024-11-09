@@ -1,6 +1,6 @@
 package com.furidaweb.server.controller;
 
-import com.furidaweb.server.dto.CreatePostDto;
+import com.furidaweb.server.dto.PostDto;
 import com.furidaweb.server.dto.ErrorResponse;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.exception.ResourceNotFoundException;
@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -33,7 +32,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createPost(@ModelAttribute CreatePostDto post) {
+    public ResponseEntity<?> createPost(@ModelAttribute PostDto post) {
         try {
             Post newPost = postService.createPost(post);
             return ResponseEntity.ok(newPost);

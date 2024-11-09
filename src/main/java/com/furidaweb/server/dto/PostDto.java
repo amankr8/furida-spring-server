@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreatePostDto {
+public class PostDto {
 
     private String title;
     private String content;

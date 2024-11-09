@@ -1,6 +1,6 @@
 package com.furidaweb.server.service;
 
-import com.furidaweb.server.dto.CreatePostDto;
+import com.furidaweb.server.dto.PostDto;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.PostRepository;
@@ -46,7 +46,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post createPost(CreatePostDto post) throws IOException {
+    public Post createPost(PostDto post) throws IOException {
         Post newPost = new Post();
         newPost.setTitle(post.getTitle());
         newPost.setContent(post.getContent());
