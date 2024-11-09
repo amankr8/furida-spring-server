@@ -10,19 +10,19 @@ import org.springframework.context.annotation.Configuration;
 public class CloudinaryConfig {
 
     @Value("${fileStorage.name}")
-    private String UPLOAD_URL;
+    private String CLOUD_NAME;
 
     @Value("${fileStorage.api.key}")
-    private String PUBLIC_KEY;
+    private String API_KEY;
 
     @Value("${fileStorage.api.secret}")
-    private String PRIVATE_KEY;
+    private String API_SECRET;
 
     @Bean
     public Cloudinary cloudinary() {
         return new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", UPLOAD_URL,
-                "api_key", PUBLIC_KEY,
-                "api_secret", PRIVATE_KEY));
+                "cloud_name", CLOUD_NAME,
+                "api_key", API_KEY,
+                "api_secret", API_SECRET));
     }
 }
