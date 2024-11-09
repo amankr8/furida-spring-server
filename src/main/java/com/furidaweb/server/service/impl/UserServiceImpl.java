@@ -1,7 +1,8 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.impl;
 
 import com.furidaweb.server.entity.User;
 import com.furidaweb.server.repository.UserRepository;
+import com.furidaweb.server.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 

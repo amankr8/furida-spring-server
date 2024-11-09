@@ -1,5 +1,6 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.impl;
 
+import com.furidaweb.server.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

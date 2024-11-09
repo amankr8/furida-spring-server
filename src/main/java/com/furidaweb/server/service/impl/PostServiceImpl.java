@@ -1,14 +1,13 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.impl;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.furidaweb.server.dto.PostDto;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.PostRepository;
+import com.furidaweb.server.service.CloudinaryService;
+import com.furidaweb.server.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -17,7 +16,7 @@ import java.util.*;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-    private final Cloudinary cloudinary;
+    private final CloudinaryService cloudinaryService;
 
     @Override
     public List<Post> getAllPosts() {
@@ -29,22 +28,15 @@ public class PostServiceImpl implements PostService {
         return postRepository.findById(id).orElse(null);
     }
 
-    private String uploadFile(MultipartFile file) throws Exception {
-        Map params = ObjectUtils.asMap();
-        Map result = cloudinary.uploader().upload(file.getBytes(), params);
-
-        return result.get("url").toString();
-    }
-
     @Override
-    public Post createPost(PostDto post) throws Exception {
+    public Post createPost(PostDto post) {
         Post newPost = new Post();
         newPost.setTitle(post.getTitle());
         newPost.setContent(post.getContent());
         newPost.setDate(new Date());
 
         if (post.getFile() != null) {
-            newPost.setImgUrl(uploadFile(post.getFile()));
+            newPost.setImgUrl(this.cloudinaryService.uploadFile(post.getFile()));
         }
         return postRepository.save(newPost);
     }

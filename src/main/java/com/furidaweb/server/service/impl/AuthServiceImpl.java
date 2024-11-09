@@ -1,9 +1,10 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.impl;
 
 import com.furidaweb.server.dto.SignInUserDto;
 import com.furidaweb.server.dto.SignUpUserDto;
 import com.furidaweb.server.entity.User;
 import com.furidaweb.server.repository.UserRepository;
+import com.furidaweb.server.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
