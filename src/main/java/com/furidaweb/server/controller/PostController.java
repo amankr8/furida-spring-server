@@ -1,6 +1,7 @@
 package com.furidaweb.server.controller;
 
 import com.furidaweb.server.dto.PostDto;
+import com.furidaweb.server.dto.PostResponseDto;
 import com.furidaweb.server.dto.StatusResponse;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.exception.ResourceNotFoundException;
@@ -22,19 +23,34 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+    public ResponseEntity<?> getAllPosts() {
+        try {
+            List<PostResponseDto> posts = postService.getAllPosts();
+            return ResponseEntity.ok(posts);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new StatusResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
+        }
     }
 
     @GetMapping("/{id}")
-    public Post getPost(@PathVariable int id) {
-        return postService.getPostById(id);
+    public ResponseEntity<?> getPost(@PathVariable int id) {
+        try {
+            PostResponseDto post = postService.getPostById(id);
+            return ResponseEntity.ok(post);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new StatusResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new StatusResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
+        }
     }
 
     @PostMapping
     public ResponseEntity<?> createPost(@ModelAttribute PostDto post) {
         try {
-            Post newPost = postService.createPost(post);
+            PostResponseDto newPost = postService.createPost(post);
             return ResponseEntity.ok(newPost);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -45,7 +61,7 @@ public class PostController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePost(@PathVariable int id, @RequestBody Post post) {
         try {
-            Post updatedPost = postService.updatePost(id, post);
+            PostResponseDto updatedPost = postService.updatePost(id, post);
             return ResponseEntity.ok(updatedPost);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
