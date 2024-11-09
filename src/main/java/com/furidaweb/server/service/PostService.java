@@ -12,11 +12,11 @@ public interface PostService {
 
     Post getPostById(int id);
 
-    Post createPost(PostDto post) throws IOException;
+    Post createPost(PostDto post) throws Exception;
 
     Post updatePost(int id, Post post);
 
-    void deletePost(int id) throws IOException;
+    void deletePost(int id);
 
-    void deleteAllPosts() throws IOException;
+    void deleteAllPosts();
 }
