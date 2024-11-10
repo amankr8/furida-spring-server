@@ -1,6 +1,6 @@
 package com.furidaweb.server.service.post;
 
-import com.furidaweb.server.dto.post.PostDto;
+import com.furidaweb.server.dto.post.PostRequestDto;
 import com.furidaweb.server.dto.post.PostResponseDto;
 import com.furidaweb.server.entity.Post;
 
@@ -12,7 +12,7 @@ public interface PostService {
 
     PostResponseDto getPostById(int id);
 
-    PostResponseDto createPost(PostDto post) throws Exception;
+    PostResponseDto createPost(PostRequestDto post) throws Exception;
 
     PostResponseDto updatePost(int id, Post post);
 

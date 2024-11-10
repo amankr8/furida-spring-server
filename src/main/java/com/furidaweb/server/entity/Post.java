@@ -20,7 +20,7 @@ public class Post {
     @Column(name = "p_title")
     private String title;
 
-    @Column(name = "p_content")
+    @Column(name = "p_content", length = 510)
     private String content;
 
     @Column(name = "p_date")

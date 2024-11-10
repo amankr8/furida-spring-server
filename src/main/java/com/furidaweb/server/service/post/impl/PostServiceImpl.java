@@ -1,6 +1,6 @@
 package com.furidaweb.server.service.post.impl;
 
-import com.furidaweb.server.dto.post.PostDto;
+import com.furidaweb.server.dto.post.PostRequestDto;
 import com.furidaweb.server.dto.post.PostResponseDto;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.entity.PostImage;
@@ -36,7 +36,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponseDto createPost(PostDto post) {
+    public PostResponseDto createPost(PostRequestDto post) {
         Post newPost = Post.builder()
                 .date(new Date())
                 .title(post.getTitle())
