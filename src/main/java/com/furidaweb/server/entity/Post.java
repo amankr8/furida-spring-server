@@ -14,9 +14,15 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "p_id")
     private int id;
+
+    @Column(name = "p_title")
     private String title;
+
+    @Column(name = "p_content")
     private String content;
+
+    @Column(name = "p_date")
     private Date date;
-    private String imgUrl;
 }
