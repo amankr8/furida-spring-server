@@ -1,4 +1,4 @@
-package com.furidaweb.server.dto;
+package com.furidaweb.server.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

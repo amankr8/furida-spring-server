@@ -1,7 +1,7 @@
 package com.furidaweb.server.controller;
 
-import com.furidaweb.server.dto.PostDto;
-import com.furidaweb.server.dto.PostResponseDto;
+import com.furidaweb.server.dto.post.PostDto;
+import com.furidaweb.server.dto.post.PostResponseDto;
 import com.furidaweb.server.dto.StatusResponse;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.exception.ResourceNotFoundException;
