@@ -8,6 +8,7 @@ import com.furidaweb.server.service.auth.AuthService;
 import com.furidaweb.server.service.auth.JwtService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,7 +22,10 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class AuthController {
 
+    @Autowired
     private final JwtService jwtService;
+
+    @Autowired
     private final AuthService authService;
 
     @PostMapping("/signup")
