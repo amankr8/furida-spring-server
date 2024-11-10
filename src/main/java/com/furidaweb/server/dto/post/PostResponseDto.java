@@ -1,19 +1,21 @@
-package com.furidaweb.server.dto;
+package com.furidaweb.server.dto.post;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDto {
+public class PostResponseDto {
 
+    private int id;
     private String title;
     private String content;
+    private String imgUrl;
     private Date date;
-    private MultipartFile file;
 }

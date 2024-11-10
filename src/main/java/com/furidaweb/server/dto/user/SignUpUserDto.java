@@ -1,4 +1,4 @@
-package com.furidaweb.server.dto;
+package com.furidaweb.server.dto.user;
 
 import com.furidaweb.server.entity.Role;
 import jakarta.validation.constraints.Email;

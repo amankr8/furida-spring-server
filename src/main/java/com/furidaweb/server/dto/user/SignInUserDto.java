@@ -1,4 +1,4 @@
-package com.furidaweb.server.dto;
+package com.furidaweb.server.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

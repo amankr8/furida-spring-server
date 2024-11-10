@@ -1,8 +1,8 @@
 package com.furidaweb.server.controller;
 
-import com.furidaweb.server.dto.AuthResponse;
-import com.furidaweb.server.dto.SignInUserDto;
-import com.furidaweb.server.dto.SignUpUserDto;
+import com.furidaweb.server.dto.auth.AuthResponse;
+import com.furidaweb.server.dto.user.SignInUserDto;
+import com.furidaweb.server.dto.user.SignUpUserDto;
 import com.furidaweb.server.entity.User;
 import com.furidaweb.server.service.auth.AuthService;
 import com.furidaweb.server.service.auth.JwtService;
