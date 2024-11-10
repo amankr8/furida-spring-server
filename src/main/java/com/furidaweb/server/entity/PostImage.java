@@ -15,16 +15,16 @@ public class PostImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pi_id")
+    @Column(name = "postimg_id")
     private int id;
 
-    @Column(name = "pi_public_id")
+    @Column(name = "postimg_public_id")
     private String publicId;
 
-    @Column(name = "pi_url")
+    @Column(name = "postimg_url")
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "p_id")
+    @JoinColumn(name = "post_id")
     private Post post;
 }

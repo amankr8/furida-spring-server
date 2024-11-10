@@ -14,15 +14,15 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "p_id")
+    @Column(name = "post_id")
     private int id;
 
-    @Column(name = "p_title")
+    @Column(name = "post_title")
     private String title;
 
-    @Column(name = "p_content", length = 510)
+    @Column(name = "post_content", length = 510)
     private String content;
 
-    @Column(name = "p_date")
+    @Column(name = "post_date")
     private Date date;
 }

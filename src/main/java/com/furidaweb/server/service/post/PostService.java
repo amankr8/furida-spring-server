@@ -2,7 +2,6 @@ package com.furidaweb.server.service.post;
 
 import com.furidaweb.server.dto.post.PostRequestDto;
 import com.furidaweb.server.dto.post.PostResponseDto;
-import com.furidaweb.server.entity.Post;
 
 import java.util.List;
 

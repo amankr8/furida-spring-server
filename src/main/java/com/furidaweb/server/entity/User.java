@@ -18,20 +18,20 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "u_id")
+    @Column(name = "user_id")
     private int id;
 
-    @Column(name = "u_username")
+    @Column(name = "user_username")
     private String username;
 
-    @Column(name = "u_email")
+    @Column(name = "user_email")
     private String email;
 
-    @Column(name = "u_password")
+    @Column(name = "user_password")
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "u_role")
+    @Column(name = "user_role")
     private Role role;
 
     @Override
