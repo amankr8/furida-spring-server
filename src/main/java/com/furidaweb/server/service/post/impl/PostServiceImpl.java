@@ -52,7 +52,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponseDto updatePost(int id, Post post) {
+    public PostResponseDto updatePost(int id, PostRequestDto post) {
         Post updatePost = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 
