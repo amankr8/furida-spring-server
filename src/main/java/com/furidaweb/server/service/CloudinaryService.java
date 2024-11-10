@@ -6,7 +6,9 @@ import java.util.Map;
 
 public interface CloudinaryService {
 
-    Map<String, String> uploadFile(MultipartFile file);
+    Map<String, String> uploadFile(MultipartFile file, String folderPath);
 
-    boolean deleteFile(String publicId);
+    void deleteFile(String publicId);
+
+    void deleteAllFilesInFolder(String folderPath);
 }

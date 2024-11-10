@@ -66,9 +66,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePost(int id) {
-        postRepository.findById(id)
+        Post post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 
+        postImageService.deletePostImagesByPost(post);
         postRepository.deleteById(id);
     }
 
@@ -78,14 +79,19 @@ public class PostServiceImpl implements PostService {
     }
 
     private PostResponseDto createPostResponseDto(Post post) {
-        PostImage img = this.postImageService.getPostImageByPost(post);
-        String imgUrl = img == null ? null : img.getUrl();
+        List<PostImage> images = this.postImageService.getPostImagesByPost(post);
+        List<String> imgUrls = new ArrayList<>();
+        if (!images.isEmpty()) {
+            imgUrls = images.stream().map(PostImage::getUrl).toList();
+        } else {
+            imgUrls.add(null);
+        }
 
         return PostResponseDto.builder()
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
-                .imgUrl(imgUrl)
+                .imgUrl(imgUrls.get(0))
                 .date(post.getDate())
                 .build();
     }

@@ -16,14 +16,14 @@ public class CloudinaryServiceImpl implements CloudinaryService {
 
     private final Cloudinary cloudinary;
 
-    public Map<String, String> uploadFile(MultipartFile file) {
+    @Override
+    public Map<String, String> uploadFile(MultipartFile file, String folderPath) {
         Map<String, String> uploadedFile = new HashMap<>();
-        String uploadFolder = "furida/posts";
         try {
-            Map params = ObjectUtils.asMap(
-                    "folder", uploadFolder
+            Map<?, ?> params = ObjectUtils.asMap(
+                    "folder", folderPath
             );
-            Map result = cloudinary.uploader().upload(file.getBytes(), params);
+            Map<?, ?> result = cloudinary.uploader().upload(file.getBytes(), params);
 
             uploadedFile.put("public_id", result.get("public_id").toString());
             uploadedFile.put("url", result.get("url").toString());
@@ -35,15 +35,31 @@ public class CloudinaryServiceImpl implements CloudinaryService {
         return uploadedFile;
     }
 
-    public boolean deleteFile(String publicId) {
+    @Override
+    public void deleteFile(String publicId) {
         try {
-            Map params = ObjectUtils.asMap();
-            Map deleteResult = cloudinary.uploader().destroy(publicId, params);
+            Map<?, ?> params = ObjectUtils.asMap();
+            Map<?, ?> deleteResult = cloudinary.uploader().destroy(publicId, params);
 
-            return deleteResult.get("result").equals("ok");
+            if (!deleteResult.get("result").equals("ok")) {
+                System.out.println("Could not delete file: " + deleteResult.get("result"));
+            }
         } catch (IOException e) {
             System.out.println("Error deleting file: " + e.getMessage());
         }
-        return false;
+    }
+
+    @Override
+    public void deleteAllFilesInFolder(String folderPath) {
+        try {
+            Map<?, ?> params = ObjectUtils.asMap();
+            Map<?, ?> deleteResult = cloudinary.api().deleteResourcesByPrefix(folderPath, params);
+
+            if (!deleteResult.get("result").equals("ok")) {
+                System.out.println("Could not delete files: " + deleteResult.get("result"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error deleting files: " + e.getMessage());
+        }
     }
 }
