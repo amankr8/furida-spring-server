@@ -1,4 +1,4 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.user;
 
 import com.furidaweb.server.entity.User;
 

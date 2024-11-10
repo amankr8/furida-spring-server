@@ -5,7 +5,7 @@ import com.furidaweb.server.dto.PostResponseDto;
 import com.furidaweb.server.dto.StatusResponse;
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.exception.ResourceNotFoundException;
-import com.furidaweb.server.service.PostService;
+import com.furidaweb.server.service.post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

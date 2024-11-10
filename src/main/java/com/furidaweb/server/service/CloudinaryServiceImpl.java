@@ -1,8 +1,7 @@
-package com.furidaweb.server.service.impl;
+package com.furidaweb.server.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.furidaweb.server.service.CloudinaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,4 +1,4 @@
-package com.furidaweb.server.service.impl;
+package com.furidaweb.server.service.post.impl;
 
 import com.furidaweb.server.dto.PostDto;
 import com.furidaweb.server.dto.PostResponseDto;
@@ -6,8 +6,8 @@ import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.entity.PostImage;
 import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.PostRepository;
-import com.furidaweb.server.service.PostImageService;
-import com.furidaweb.server.service.PostService;
+import com.furidaweb.server.service.post.PostImageService;
+import com.furidaweb.server.service.post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

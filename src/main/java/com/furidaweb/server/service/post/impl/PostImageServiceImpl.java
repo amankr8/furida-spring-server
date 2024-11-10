@@ -1,10 +1,10 @@
-package com.furidaweb.server.service.impl;
+package com.furidaweb.server.service.post.impl;
 
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.entity.PostImage;
 import com.furidaweb.server.repository.PostImageRepository;
 import com.furidaweb.server.service.CloudinaryService;
-import com.furidaweb.server.service.PostImageService;
+import com.furidaweb.server.service.post.PostImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,4 +1,4 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.auth;
 
 import com.furidaweb.server.dto.SignInUserDto;
 import com.furidaweb.server.dto.SignUpUserDto;

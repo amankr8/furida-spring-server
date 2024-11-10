@@ -1,4 +1,4 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.post;
 
 import com.furidaweb.server.entity.Post;
 import com.furidaweb.server.entity.PostImage;

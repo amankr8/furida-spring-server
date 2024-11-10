@@ -1,7 +1,7 @@
 package com.furidaweb.server.controller;
 
 import com.furidaweb.server.entity.User;
-import com.furidaweb.server.service.UserService;
+import com.furidaweb.server.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

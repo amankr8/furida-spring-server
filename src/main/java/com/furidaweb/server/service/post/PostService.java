@@ -1,4 +1,4 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.post;
 
 import com.furidaweb.server.dto.PostDto;
 import com.furidaweb.server.dto.PostResponseDto;

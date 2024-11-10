@@ -1,11 +1,8 @@
-package com.furidaweb.server.service;
+package com.furidaweb.server.service.auth;
 
-import io.jsonwebtoken.Claims;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Date;
 import java.util.Map;
-import java.util.function.Function;
 
 public interface JwtService {
 
