@@ -9,6 +9,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      
+  spring:
+    servlet:
+      multipart:
+        max-file-size: 2MB    # Maximum size of a single uploaded file
+        max-request-size: 10MB # Maximum size of a complete request (all files + form data)
 
 jwt:
   secret: d829cdbf49f27fd8db229bc3d8304663d271bab133c86b6166311bba63310a40
