@@ -13,7 +13,7 @@ spring:
   spring:
     servlet:
       multipart:
-        max-file-size: 2MB    # Maximum size of a single uploaded file
+        max-file-size: 2MB     # Maximum size of a single uploaded file
         max-request-size: 10MB # Maximum size of a complete request (all files + form data)
 
 jwt:
