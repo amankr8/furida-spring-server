@@ -9,6 +9,7 @@ import com.furidaweb.server.repository.PostRepository;
 import com.furidaweb.server.service.post.PostImageService;
 import com.furidaweb.server.service.post.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,7 +18,9 @@ import java.util.*;
 @Service
 public class PostServiceImpl implements PostService {
 
+    @Autowired
     private final PostRepository postRepository;
+    @Autowired
     private final PostImageService postImageService;
 
     @Override

@@ -4,6 +4,7 @@ import com.furidaweb.server.entity.User;
 import com.furidaweb.server.repository.UserRepository;
 import com.furidaweb.server.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private final UserRepository userRepository;
 
     @Override

@@ -6,6 +6,7 @@ import com.furidaweb.server.repository.PostImageRepository;
 import com.furidaweb.server.service.CloudinaryService;
 import com.furidaweb.server.service.post.PostImageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +17,9 @@ import java.util.Map;
 @Service
 public class PostImageServiceImpl implements PostImageService {
 
+    @Autowired
     private final PostImageRepository postImageRepository;
+    @Autowired
     private final CloudinaryService cloudinaryService;
 
     @Override
