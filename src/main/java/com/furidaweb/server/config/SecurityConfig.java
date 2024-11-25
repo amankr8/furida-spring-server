@@ -29,7 +29,7 @@ public class SecurityConfig {
         http.cors().and().csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**","/roles")
+                .requestMatchers("/auth/**","/posts")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -46,13 +46,11 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
         configuration.setAllowedOrigins(List.of("http://localhost:8080","http://localhost:4200"));
         configuration.setAllowedMethods(List.of("GET","PUT","POST","DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
         source.registerCorsConfiguration("/**",configuration);
 
         return source;
