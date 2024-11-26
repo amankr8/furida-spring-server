@@ -56,19 +56,19 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostResponseDto updatePost(int id, PostRequestDto post) {
-        Post updatePost = postRepository.findById(id)
+        Post oldPost = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 
-        updatePost.setTitle(post.getTitle());
-        updatePost.setContent(post.getContent());
-        updatePost.setDate(new Date());
+        oldPost.setTitle(post.getTitle());
+        oldPost.setContent(post.getContent());
+        oldPost.setDate(new Date());
 
-        Post updatedPost = postRepository.save(updatePost);
+        Post updatedPost = postRepository.save(oldPost);
         return createPostResponseDto(updatedPost);
     }
 
     @Override
-    public void deletePost(int id) {
+    public void deletePostById(int id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 

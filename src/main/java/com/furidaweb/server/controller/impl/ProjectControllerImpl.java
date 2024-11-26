@@ -1,13 +1,11 @@
 package com.furidaweb.server.controller.impl;
 
-import com.furidaweb.server.controller.PostController;
+import com.furidaweb.server.controller.ProjectController;
 import com.furidaweb.server.dto.StatusResponse;
-import com.furidaweb.server.dto.post.PostRequestDto;
-import com.furidaweb.server.dto.post.PostResponseDto;
+import com.furidaweb.server.entity.Project;
 import com.furidaweb.server.exception.ResourceNotFoundException;
-import com.furidaweb.server.service.post.PostService;
+import com.furidaweb.server.service.project.ProjectService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,16 +14,15 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-public class PostControllerImpl implements PostController {
+public class ProjectControllerImpl implements ProjectController {
 
-    @Autowired
-    private final PostService postService;
+    private final ProjectService projectService;
 
     @Override
-    public ResponseEntity<?> getAllPosts() {
+    public ResponseEntity<?> getAllProjects() {
         try {
-            List<PostResponseDto> posts = postService.getAllPosts();
-            return ResponseEntity.ok(posts);
+            List<Project> projects = projectService.getAllProjects();
+            return ResponseEntity.ok(projects);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new StatusResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
@@ -33,10 +30,10 @@ public class PostControllerImpl implements PostController {
     }
 
     @Override
-    public ResponseEntity<?> getPost(int id) {
+    public ResponseEntity<?> getProject(int id) {
         try {
-            PostResponseDto post = postService.getPostById(id);
-            return ResponseEntity.ok(post);
+            Project project = projectService.getProjectById(id);
+            return ResponseEntity.ok(project);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new StatusResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
@@ -47,10 +44,10 @@ public class PostControllerImpl implements PostController {
     }
 
     @Override
-    public ResponseEntity<?> createPost(PostRequestDto post) {
+    public ResponseEntity<?> addProject(Project project) {
         try {
-            PostResponseDto newPost = postService.createPost(post);
-            return ResponseEntity.ok(newPost);
+            Project newProject = projectService.addProject(project);
+            return ResponseEntity.ok(newProject);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new StatusResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
@@ -58,10 +55,10 @@ public class PostControllerImpl implements PostController {
     }
 
     @Override
-    public ResponseEntity<?> updatePost(int id, PostRequestDto post) {
+    public ResponseEntity<?> updateProject(int id, Project project) {
         try {
-            PostResponseDto updatedPost = postService.updatePost(id, post);
-            return ResponseEntity.ok(updatedPost);
+            Project updatedProject = projectService.updateProject(id, project);
+            return ResponseEntity.ok(updatedProject);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new StatusResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
@@ -72,10 +69,10 @@ public class PostControllerImpl implements PostController {
     }
 
     @Override
-    public ResponseEntity<?> deletePost(int id) {
+    public ResponseEntity<?> deleteProject(int id) {
         try {
-            postService.deletePostById(id);
-            return ResponseEntity.ok(new StatusResponse(HttpStatus.OK.value(), "Post deleted successfully!"));
+            projectService.deleteProjectById(id);
+            return ResponseEntity.ok(new StatusResponse(HttpStatus.OK.value(), "Project deleted successfully!"));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new StatusResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
@@ -86,10 +83,10 @@ public class PostControllerImpl implements PostController {
     }
 
     @Override
-    public ResponseEntity<?> deleteAllPosts() {
+    public ResponseEntity<?> deleteAllProjects() {
         try {
-            postService.deleteAllPosts();
-            return ResponseEntity.ok(new StatusResponse(HttpStatus.OK.value(), "All Posts deleted successfully!"));
+            projectService.deleteAllProjects();
+            return ResponseEntity.ok(new StatusResponse(HttpStatus.OK.value(), "All Projects deleted successfully!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new StatusResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));

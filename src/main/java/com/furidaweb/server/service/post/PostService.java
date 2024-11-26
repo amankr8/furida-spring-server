@@ -15,7 +15,7 @@ public interface PostService {
 
     PostResponseDto updatePost(int id, PostRequestDto post);
 
-    void deletePost(int id);
+    void deletePostById(int id);
 
     void deleteAllPosts();
 }

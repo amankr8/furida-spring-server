@@ -20,7 +20,7 @@ public interface PostController {
     ResponseEntity<?> createPost(@Valid @ModelAttribute PostRequestDto post);
 
     @PutMapping("/{id}")
-    ResponseEntity<?> updatePost(@PathVariable int id, @ModelAttribute PostRequestDto post);
+    ResponseEntity<?> updatePost(@PathVariable int id, @Valid @ModelAttribute PostRequestDto post);
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deletePost(@PathVariable int id);
