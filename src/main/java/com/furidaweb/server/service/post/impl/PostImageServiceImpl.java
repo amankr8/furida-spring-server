@@ -51,8 +51,6 @@ public class PostImageServiceImpl implements PostImageService {
 
     @Override
     public void deleteAllPostImages() {
-        List<PostImage> postImages = postImageRepository.findAll();
-
         this.cloudinaryService.deleteAllFilesInFolder("furida/posts");
         postImageRepository.deleteAll();
     }
