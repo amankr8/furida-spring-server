@@ -17,7 +17,7 @@ public interface PostController {
     ResponseEntity<?> getPost(@PathVariable int id);
 
     @PostMapping
-    ResponseEntity<?> createPost(@Valid @ModelAttribute PostRequestDto post);
+    ResponseEntity<?> createPost(@Valid @ModelAttribute PostRequestDto post) throws Exception;
 
     @PutMapping("/{id}")
     ResponseEntity<?> updatePost(@PathVariable int id, @Valid @ModelAttribute PostRequestDto post);
