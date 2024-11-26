@@ -22,7 +22,6 @@ public class PostImageServiceImpl implements PostImageService {
     private final PostImageRepository postImageRepository;
     @Autowired
     private final CloudinaryService cloudinaryService;
-    @Autowired
     private final String FOLDER_PATH = AppConstants.APP_NAME + "/posts";
 
     @Override

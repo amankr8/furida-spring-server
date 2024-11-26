@@ -27,5 +27,5 @@ public class DocFile {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_id")
-    private Document doc;
+    private Document document;
 }

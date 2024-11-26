@@ -22,7 +22,6 @@ public class DocFileServiceImpl implements DocFileService {
     private final DocFileRepository docFileRepository;
     @Autowired
     private final CloudinaryService cloudinaryService;
-    @Autowired
     private final String FOLDER_PATH = AppConstants.APP_NAME + "/documents";
 
     @Override
@@ -37,7 +36,7 @@ public class DocFileServiceImpl implements DocFileService {
         DocFile docFile = DocFile.builder()
                 .publicId(fileDetails.get("public_id"))
                 .url(fileDetails.get("url"))
-                .doc(doc)
+                .document(doc)
                 .build();
 
         docFileRepository.save(docFile);
