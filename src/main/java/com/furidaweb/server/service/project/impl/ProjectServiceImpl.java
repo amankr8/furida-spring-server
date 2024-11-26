@@ -5,6 +5,7 @@ import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.ProjectRepository;
 import com.furidaweb.server.service.project.ProjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
+    @Autowired
     private final ProjectRepository projectRepository;
 
     @Override

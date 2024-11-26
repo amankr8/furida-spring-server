@@ -39,32 +39,31 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponseDto createPost(PostRequestDto post) {
+    public PostResponseDto createPost(PostRequestDto postDto) {
         Post newPost = Post.builder()
                 .date(new Date())
-                .title(post.getTitle())
-                .content(post.getContent())
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
                 .build();
 
         Post savedPost = postRepository.save(newPost);
-        if (post.getFile() != null) {
-            this.postImageService.saveImage(post.getFile(), savedPost);
+        if (postDto.getFile() != null) {
+            this.postImageService.saveImage(postDto.getFile(), savedPost);
         }
 
         return createPostResponseDto(savedPost);
     }
 
     @Override
-    public PostResponseDto updatePost(int id, PostRequestDto post) {
-        Post oldPost = postRepository.findById(id)
+    public PostResponseDto updatePost(int id, PostRequestDto postDto) {
+        Post post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 
-        oldPost.setTitle(post.getTitle());
-        oldPost.setContent(post.getContent());
-        oldPost.setDate(new Date());
+        post.setTitle(postDto.getTitle());
+        post.setContent(postDto.getContent());
+        post.setDate(new Date());
 
-        Post updatedPost = postRepository.save(oldPost);
-        return createPostResponseDto(updatedPost);
+        return createPostResponseDto(postRepository.save(post));
     }
 
     @Override
@@ -78,6 +77,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deleteAllPosts() {
+        postImageService.deleteAllPostImages();
         postRepository.deleteAll();
     }
 

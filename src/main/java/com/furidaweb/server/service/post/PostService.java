@@ -11,9 +11,9 @@ public interface PostService {
 
     PostResponseDto getPostById(int id);
 
-    PostResponseDto createPost(PostRequestDto post) throws Exception;
+    PostResponseDto createPost(PostRequestDto postDto) throws Exception;
 
-    PostResponseDto updatePost(int id, PostRequestDto post);
+    PostResponseDto updatePost(int id, PostRequestDto postDto);
 
     void deletePostById(int id);
 

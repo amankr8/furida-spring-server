@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/posts")
+@RequestMapping("/documents")
 @Validated
 public interface DocController {
 
@@ -17,10 +17,10 @@ public interface DocController {
     ResponseEntity<?> getDocument(@PathVariable int id);
 
     @PostMapping
-    ResponseEntity<?> createDocument(@Valid @ModelAttribute DocRequestDto post);
+    ResponseEntity<?> createDocument(@Valid @ModelAttribute DocRequestDto doc) throws Exception;
 
     @PutMapping("/{id}")
-    ResponseEntity<?> updateDocument(@PathVariable int id, @Valid @ModelAttribute DocRequestDto post);
+    ResponseEntity<?> updateDocument(@PathVariable int id, @Valid @ModelAttribute DocRequestDto doc);
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteDocument(@PathVariable int id);

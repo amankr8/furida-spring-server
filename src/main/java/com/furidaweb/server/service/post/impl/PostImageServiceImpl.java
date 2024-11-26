@@ -5,6 +5,7 @@ import com.furidaweb.server.entity.PostImage;
 import com.furidaweb.server.repository.PostImageRepository;
 import com.furidaweb.server.service.CloudinaryService;
 import com.furidaweb.server.service.post.PostImageService;
+import com.furidaweb.server.util.AppConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class PostImageServiceImpl implements PostImageService {
     private final PostImageRepository postImageRepository;
     @Autowired
     private final CloudinaryService cloudinaryService;
+    @Autowired
+    private final String FOLDER_PATH = AppConstants.APP_NAME + "/posts";
 
     @Override
     public List<PostImage> getPostImagesByPost(Post post) {
@@ -29,10 +32,10 @@ public class PostImageServiceImpl implements PostImageService {
 
     @Override
     public void saveImage(MultipartFile file, Post post) {
-        Map<String, String> imageDetails = this.cloudinaryService.uploadFile(file, "furida/posts");
+        Map<String, String> imageDetails = this.cloudinaryService.uploadFile(file, FOLDER_PATH);
         PostImage postImage = PostImage.builder()
-                .url(imageDetails.get("url"))
                 .publicId(imageDetails.get("public_id"))
+                .url(imageDetails.get("url"))
                 .post(post)
                 .build();
 
@@ -51,7 +54,7 @@ public class PostImageServiceImpl implements PostImageService {
 
     @Override
     public void deleteAllPostImages() {
-        this.cloudinaryService.deleteAllFilesInFolder("furida/posts");
+        this.cloudinaryService.deleteAllFilesInFolder(FOLDER_PATH);
         postImageRepository.deleteAll();
     }
 }

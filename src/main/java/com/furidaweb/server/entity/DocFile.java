@@ -26,6 +26,6 @@ public class DocFile {
     private String url;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "document_id")
+    @JoinColumn(name = "doc_id")
     private Document doc;
 }
