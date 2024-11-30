@@ -39,6 +39,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
         oldProject.setName(project.getName());
         oldProject.setDesc(project.getDesc());
+        oldProject.setAddress(project.getAddress());
 
         return projectRepository.save(oldProject);
     }

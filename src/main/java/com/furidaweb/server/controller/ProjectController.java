@@ -14,10 +14,10 @@ public interface ProjectController {
     ResponseEntity<?> getProject(@PathVariable int id);
 
     @PostMapping
-    ResponseEntity<?> addProject(Project project);
+    ResponseEntity<?> addProject(@RequestBody Project project);
 
     @PutMapping("/{id}")
-    ResponseEntity<?> updateProject(@PathVariable int id, Project project);
+    ResponseEntity<?> updateProject(@PathVariable int id, @RequestBody Project project);
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteProject(@PathVariable int id);

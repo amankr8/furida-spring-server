@@ -24,4 +24,7 @@ public class Project {
 
     @Column(name = "project_desc")
     private String desc;
+
+    @Column(name = "project_address")
+    private String address;
 }
