@@ -23,12 +23,13 @@ public class CloudinaryServiceImpl implements CloudinaryService {
         Map<String, String> uploadedFile = new HashMap<>();
         try {
             Map<?, ?> params = ObjectUtils.asMap(
-                    "folder", folderPath
+                    "folder", folderPath,
+                    "resource_type", "auto"
             );
             Map<?, ?> result = cloudinary.uploader().upload(file.getBytes(), params);
 
             uploadedFile.put("public_id", result.get("public_id").toString());
-            uploadedFile.put("url", result.get("url").toString());
+            uploadedFile.put("url", result.get("secure_url").toString());
 
             return uploadedFile;
         } catch (IOException e) {
