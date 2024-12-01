@@ -17,7 +17,7 @@ public interface MessageController {
     ResponseEntity<?> sendMessage(@RequestBody Message msg);
 
     @PutMapping("/{id}")
-    ResponseEntity<?> changeReadStatus(@PathVariable int id);
+    ResponseEntity<?> toggleReadStatus(@PathVariable int id);
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteMessage(@PathVariable int id);
