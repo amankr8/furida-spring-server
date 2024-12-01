@@ -5,6 +5,7 @@ import com.furidaweb.server.dto.StatusResponse;
 import com.furidaweb.server.entity.Project;
 import com.furidaweb.server.service.project.ProjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 public class ProjectControllerImpl implements ProjectController {
 
+    @Autowired
     private final ProjectService projectService;
 
     @Override
