@@ -5,7 +5,6 @@ import com.furidaweb.server.dto.StatusResponse;
 import com.furidaweb.server.entity.Message;
 import com.furidaweb.server.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MessageControllerImpl implements MessageController {
 
-    @Autowired
     private final MessageService messageService;
 
     @Override
