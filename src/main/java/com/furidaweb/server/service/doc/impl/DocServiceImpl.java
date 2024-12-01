@@ -79,6 +79,7 @@ public class DocServiceImpl implements DocService {
         DocFile docFile = docFileService.getDocFileByDocument(doc);
 
         return DocResponseDto.builder()
+                .id(doc.getId())
                 .name(doc.getName())
                 .desc(doc.getDesc())
                 .docUrl(docFile.getUrl())

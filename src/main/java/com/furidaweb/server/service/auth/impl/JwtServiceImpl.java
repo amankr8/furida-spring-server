@@ -61,7 +61,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        long jwtExpiration = 1000L * 60 * 24;
+        long jwtExpiration = 1000L * 60 * 60 * 24;
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
