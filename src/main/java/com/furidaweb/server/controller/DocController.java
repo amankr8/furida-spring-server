@@ -13,6 +13,9 @@ public interface DocController {
     @GetMapping
     ResponseEntity<?> getAllDocuments();
 
+    @GetMapping("/project/{projectId}")
+    ResponseEntity<?> getDocumentsByProject(@PathVariable int projectId);
+
     @GetMapping("/{id}")
     ResponseEntity<?> getDocument(@PathVariable int id);
 

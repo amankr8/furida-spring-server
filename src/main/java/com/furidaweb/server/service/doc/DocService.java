@@ -9,6 +9,8 @@ public interface DocService {
 
     List<DocResponseDto> getAllDocs();
 
+    List<DocResponseDto> getDocsByProject(int projectId);
+
     DocResponseDto getDocById(int id);
 
     DocResponseDto createDoc(DocRequestDto docDto);

@@ -33,6 +33,12 @@ public class DocServiceImpl implements DocService {
     }
 
     @Override
+    public List<DocResponseDto> getDocsByProject(int projectId) {
+        List<Document> docs = docRepository.findByProject(projectService.getProjectById(projectId));
+        return docs.stream().map(this::createDocResponseDto).toList();
+    }
+
+    @Override
     public DocResponseDto getDocById(int id) {
         Document doc = docRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Document not found"));

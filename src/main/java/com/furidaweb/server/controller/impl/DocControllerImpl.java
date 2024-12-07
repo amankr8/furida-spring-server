@@ -27,6 +27,12 @@ public class DocControllerImpl implements DocController {
     }
 
     @Override
+    public ResponseEntity<?> getDocumentsByProject(int projectId) {
+        List<DocResponseDto> docs = docService.getDocsByProject(projectId);
+        return ResponseEntity.ok(docs);
+    }
+
+    @Override
     public ResponseEntity<?> getDocument(int id) {
         DocResponseDto doc = docService.getDocById(id);
         return ResponseEntity.ok(doc);
