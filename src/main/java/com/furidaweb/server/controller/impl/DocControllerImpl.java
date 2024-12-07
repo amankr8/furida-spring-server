@@ -33,7 +33,7 @@ public class DocControllerImpl implements DocController {
     }
 
     @Override
-    public ResponseEntity<?> createDocument(DocRequestDto doc) throws Exception {
+    public ResponseEntity<?> createDocument(DocRequestDto doc) {
         DocResponseDto newDoc = docService.createDoc(doc);
         return ResponseEntity.ok(newDoc);
     }

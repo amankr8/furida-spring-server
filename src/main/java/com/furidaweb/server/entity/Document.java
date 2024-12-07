@@ -24,4 +24,8 @@ public class Document {
 
     @Column(name = "doc_desc")
     private String desc;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
 }

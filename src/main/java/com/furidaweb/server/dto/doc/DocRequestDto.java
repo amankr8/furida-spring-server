@@ -1,6 +1,7 @@
 package com.furidaweb.server.dto.doc;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,7 @@ public class DocRequestDto {
     private String desc;
 
     private MultipartFile file;
+
+    @NotNull(message = "Project is required")
+    private int projectId;
 }

@@ -15,4 +15,5 @@ public class DocResponseDto {
     private String name;
     private String desc;
     private String docUrl;
+    private int projectId;
 }

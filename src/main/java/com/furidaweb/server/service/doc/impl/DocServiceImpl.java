@@ -8,6 +8,7 @@ import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.DocRepository;
 import com.furidaweb.server.service.doc.DocFileService;
 import com.furidaweb.server.service.doc.DocService;
+import com.furidaweb.server.service.project.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class DocServiceImpl implements DocService {
     private final DocRepository docRepository;
     @Autowired
     private final DocFileService docFileService;
+    @Autowired
+    private final ProjectService projectService;
 
     @Override
     public List<DocResponseDto> getAllDocs() {
@@ -37,10 +40,11 @@ public class DocServiceImpl implements DocService {
     }
 
     @Override
-    public DocResponseDto createDoc(DocRequestDto docDto) throws Exception {
+    public DocResponseDto createDoc(DocRequestDto docDto) {
         Document newDoc = Document.builder()
                 .name(docDto.getName())
                 .desc(docDto.getDesc())
+                .project(projectService.getProjectById(docDto.getProjectId()))
                 .build();
 
         Document savedDoc = docRepository.save(newDoc);
@@ -83,6 +87,7 @@ public class DocServiceImpl implements DocService {
                 .name(doc.getName())
                 .desc(doc.getDesc())
                 .docUrl(docFile.getUrl())
+                .projectId(doc.getProject().getId())
                 .build();
     }
 }

@@ -11,7 +11,7 @@ public interface DocService {
 
     DocResponseDto getDocById(int id);
 
-    DocResponseDto createDoc(DocRequestDto docDto) throws Exception;
+    DocResponseDto createDoc(DocRequestDto docDto);
 
     DocResponseDto updateDoc(int id, DocRequestDto docDto);
 

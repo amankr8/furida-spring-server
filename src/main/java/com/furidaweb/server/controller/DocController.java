@@ -17,7 +17,7 @@ public interface DocController {
     ResponseEntity<?> getDocument(@PathVariable int id);
 
     @PostMapping
-    ResponseEntity<?> createDocument(@Valid @ModelAttribute DocRequestDto doc) throws Exception;
+    ResponseEntity<?> createDocument(@Valid @ModelAttribute DocRequestDto doc);
 
     @PutMapping("/{id}")
     ResponseEntity<?> updateDocument(@PathVariable int id, @Valid @ModelAttribute DocRequestDto doc);
