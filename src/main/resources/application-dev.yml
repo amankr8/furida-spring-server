@@ -8,4 +8,4 @@ spring:
     # Hibernate ddl-auto automatically validates or exports schema DDL to the database when the SessionFactory is created.
     jpa:
       hibernate:
-        ddl-auto: update
+        ddl-auto: create
