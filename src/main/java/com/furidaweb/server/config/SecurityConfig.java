@@ -29,7 +29,7 @@ public class SecurityConfig {
         http.cors().and().csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**","/posts")
+                .requestMatchers("/auth/**","/posts","/projects","/documents")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

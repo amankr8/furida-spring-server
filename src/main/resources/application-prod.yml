@@ -1,0 +1,4 @@
+# A DataSource is a factory for connections to the physical databases. It uses a URL, username, and password to establish the database connection.
+spring:
+  datasource:
+    url: ${DATABASE_URL}

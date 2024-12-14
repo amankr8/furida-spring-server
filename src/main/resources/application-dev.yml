@@ -1,0 +1,11 @@
+# A DataSource is a factory for connections to the physical databases. It uses a URL, username, and password to establish the database connection.
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/furida
+    username: root
+    password: admin
+
+    # Hibernate ddl-auto automatically validates or exports schema DDL to the database when the SessionFactory is created.
+    jpa:
+      hibernate:
+        ddl-auto: update
