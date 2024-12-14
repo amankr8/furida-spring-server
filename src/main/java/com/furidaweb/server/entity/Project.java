@@ -16,15 +16,15 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "project_id")
+    @Column(name = "pj_id")
     private int id;
 
-    @Column(name = "project_name")
+    @Column(name = "pj_name")
     private String name;
 
-    @Column(name = "project_desc")
+    @Column(name = "pj_desc")
     private String desc;
 
-    @Column(name = "project_address")
+    @Column(name = "pj_address")
     private String address;
 }

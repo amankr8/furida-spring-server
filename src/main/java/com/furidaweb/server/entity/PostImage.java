@@ -11,21 +11,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "postimg")
+@Table(name = "post_image")
 public class PostImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "postimg_id")
+    @Column(name = "pi_id")
     private int id;
 
-    @Column(name = "postimg_public_id")
+    @Column(name = "pi_public_id")
     private String publicId;
 
-    @Column(name = "postimg_url")
+    @Column(name = "pi_url")
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "p_id")
     private Post post;
 }

@@ -18,21 +18,21 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "message_id")
+    @Column(name = "m_id")
     private int id;
 
-    @Column(name = "message_name")
+    @Column(name = "m_name")
     private String name;
 
-    @Column(name = "message_email")
+    @Column(name = "m_email")
     private String email;
 
-    @Column(name = "message_msg", length = 510)
+    @Column(name = "m_msg", length = 510)
     private String msg;
 
-    @Column(name = "message_date")
+    @Column(name = "m_date")
     private Date date;
 
-    @Column(name = "message_read")
+    @Column(name = "m_read")
     private Boolean read;
 }

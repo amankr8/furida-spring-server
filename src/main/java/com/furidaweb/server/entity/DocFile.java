@@ -11,21 +11,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "docfile")
+@Table(name = "document_file")
 public class DocFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "docfile_id")
+    @Column(name = "df_id")
     private int id;
 
-    @Column(name = "docfile_public_id")
+    @Column(name = "df_public_id")
     private String publicId;
 
-    @Column(name = "docfile_url")
+    @Column(name = "df_url")
     private String url;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doc_id")
+    @JoinColumn(name = "d_id")
     private Document document;
 }

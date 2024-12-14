@@ -14,25 +14,25 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "app_user")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "u_id")
     private int id;
 
-    @Column(name = "user_username")
+    @Column(name = "u_username")
     private String username;
 
-    @Column(name = "user_email")
+    @Column(name = "u_email")
     private String email;
 
-    @Column(name = "user_password")
+    @Column(name = "u_password")
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_role")
+    @Column(name = "u_role")
     private Role role;
 
     @Override

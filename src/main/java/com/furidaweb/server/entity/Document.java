@@ -16,16 +16,16 @@ public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "doc_id")
+    @Column(name = "d_id")
     private int id;
 
-    @Column(name = "doc_name")
+    @Column(name = "d_name")
     private String name;
 
-    @Column(name = "doc_desc")
+    @Column(name = "d_desc")
     private String desc;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "pj_id")
     private Project project;
 }
