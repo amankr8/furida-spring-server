@@ -30,9 +30,9 @@ public class SecurityConfig {
         http.cors().and().csrf()
                 .disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/posts", "/api/projects", "/api/documents").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/messages").permitAll()
-                        .requestMatchers("/api/auth").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/posts/**", "/api/projects/**", "/api/documents/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/messages/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
