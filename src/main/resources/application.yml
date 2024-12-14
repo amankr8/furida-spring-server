@@ -14,5 +14,5 @@ jwt:
 cloudinary:
   name: ${CLOUDINARY_NAME}
   api:
-    key: ${CLOUDINARY_API}
+    key: ${CLOUDINARY_KEY}
     secret: ${CLOUDINARY_SECRET}
