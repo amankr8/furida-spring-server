@@ -9,10 +9,10 @@ spring:
         max-request-size: 10MB # Maximum size of a complete request (all files + form data)
 
 jwt:
-  secret: d829cdbf49f27fd8db229bc3d8304663d271bab133c86b6166311bba63310a40
+  secret: ${JWT_SECRET}
 
 cloudinary:
-  name: amankr8
+  name: ${CLOUDINARY_NAME}
   api:
-    key: 177184845799143
-    secret: q6rVgGB6PZJ8RbKOxE37KKsOe2Y
+    key: ${CLOUDINARY_API}
+    secret: ${CLOUDINARY_SECRET}
