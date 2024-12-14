@@ -4,7 +4,7 @@ import com.furidaweb.server.entity.Project;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/projects")
+@RequestMapping("/api/projects")
 public interface ProjectController {
 
     @GetMapping

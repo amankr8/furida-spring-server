@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@RequestMapping("/roles")
+@RequestMapping("/api/roles")
 public interface RoleController {
 
     @GetMapping

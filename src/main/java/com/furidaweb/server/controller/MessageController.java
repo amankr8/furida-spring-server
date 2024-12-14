@@ -4,7 +4,7 @@ import com.furidaweb.server.entity.Message;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/messages")
+@RequestMapping("/api/messages")
 public interface MessageController {
 
     @GetMapping
