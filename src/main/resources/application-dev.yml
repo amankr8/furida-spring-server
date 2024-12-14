@@ -5,7 +5,7 @@ spring:
     username: root
     password: admin
 
-    # Hibernate ddl-auto automatically validates or exports schema DDL to the database when the SessionFactory is created.
-    jpa:
-      hibernate:
-        ddl-auto: create
+  # Hibernate ddl-auto automatically validates or exports schema DDL to the database when the SessionFactory is created.
+  jpa:
+    hibernate:
+      ddl-auto: update
