@@ -1,5 +1,6 @@
 package com.furidaweb.server.service.auth.impl;
 
+import com.furidaweb.server.dto.auth.UpdatePassDto;
 import com.furidaweb.server.dto.user.SignInUserDto;
 import com.furidaweb.server.dto.user.SignUpUserDto;
 import com.furidaweb.server.entity.User;
@@ -56,5 +57,20 @@ public class AuthServiceImpl implements AuthService {
             )
         );
         return user;
+    }
+
+    @Override
+    public void updatePass(String username, UpdatePassDto updatePassDto) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        // Check if the old password matches
+        if (!passwordEncoder.matches(updatePassDto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Password is incorrect");
+        }
+
+        // Update to the new password
+        user.setPassword(passwordEncoder.encode(updatePassDto.getNewPassword()));
+        userRepository.save(user);
     }
 }
