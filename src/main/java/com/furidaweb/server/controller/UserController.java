@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import java.security.Principal;
 
 @RequestMapping("/api/users")
 public interface UserController {
@@ -15,5 +15,5 @@ public interface UserController {
     ResponseEntity<?> getAllUsers();
 
     @DeleteMapping("/{id}")
-    ResponseEntity<?> deleteUser(@PathVariable int id);
+    ResponseEntity<?> deleteUser(@PathVariable int id, Principal principal);
 }

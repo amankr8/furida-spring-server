@@ -12,7 +12,7 @@ public interface UserService {
 
     User updateUserDetails(int id, User user);
 
-    void deleteUserById(int id);
+    void deleteUserById(String username, int id);
 
     void deleteAllUsers();
 }

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RequiredArgsConstructor
 @RestController
 public class UserControllerImpl implements UserController {
@@ -22,8 +24,8 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<?> deleteUser(int id) {
-        userService.deleteUserById(id);
+    public ResponseEntity<?> deleteUser(int id, Principal principal) {
+        userService.deleteUserById(principal.getName(), id);
         return ResponseEntity.ok(new StatusResponse(HttpStatus.OK.value(), "User deleted successfully!"));
     }
 }
