@@ -65,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         // Check if the old password matches
-        if (!passwordEncoder.matches(updatePassDto.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(updatePassDto.getOldPassword(), user.getPassword())) {
             throw new IllegalArgumentException("Password is incorrect");
         }
 

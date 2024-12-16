@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class UpdatePassDto {
 
     @NotBlank(message = "Password is required")
-    private String password;
+    private String oldPassword;
 
     @NotBlank(message = " New password is required")
     private String newPassword;
