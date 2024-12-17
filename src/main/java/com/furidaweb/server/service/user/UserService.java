@@ -1,14 +1,17 @@
 package com.furidaweb.server.service.user;
 
+import com.furidaweb.server.dto.user.UserResponseDto;
 import com.furidaweb.server.entity.User;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User> getAllUsers();
+    List<UserResponseDto> getAllUsers();
 
-    User getUserById(int id);
+    UserResponseDto getUserById(int id);
+
+    UserResponseDto getUserByUsername(String username);
 
     User updateUserDetails(int id, User user);
 

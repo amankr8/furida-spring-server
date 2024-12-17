@@ -22,6 +22,12 @@ public class GlobalExceptionHandler {
                 .body(new StatusResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<?> handleNullPointerExceptionException(Exception e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new StatusResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();

@@ -8,6 +8,7 @@ import com.furidaweb.server.dto.user.SignUpUserDto;
 import com.furidaweb.server.entity.User;
 import com.furidaweb.server.service.auth.AuthService;
 import com.furidaweb.server.service.auth.JwtService;
+import com.furidaweb.server.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,15 @@ public class AuthControllerImpl implements AuthController {
 
     @Autowired
     private final JwtService jwtService;
-
     @Autowired
     private final AuthService authService;
+    @Autowired
+    private final UserService userService;
+
+    @Override
+    public ResponseEntity<?> getAuthUser(Principal principal) {
+        return ResponseEntity.ok(userService.getUserByUsername(principal.getName()));
+    }
 
     @Override
     public ResponseEntity<?> registerUser(SignUpUserDto signUpUserDto) {

@@ -14,6 +14,9 @@ import java.security.Principal;
 @Validated
 public interface AuthController {
 
+    @GetMapping("/auth-user")
+    ResponseEntity<?> getAuthUser(Principal principal);
+
     @PostMapping("/signup")
     ResponseEntity<?> registerUser(@Valid @RequestBody SignUpUserDto signUpUserDto);
 
