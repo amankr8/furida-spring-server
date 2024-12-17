@@ -1,6 +1,8 @@
 package com.furidaweb.server.service.user.impl;
 
+import com.furidaweb.server.dto.user.UserResponseDto;
 import com.furidaweb.server.entity.User;
+import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.UserRepository;
 import com.furidaweb.server.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +21,24 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponseDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(this::createUserResponseDto)
+                .toList();
     }
 
     @Override
-    public User getUserById(int id) {
-        return userRepository.findById(id).orElse(null);
+    public UserResponseDto getUserById(int id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return createUserResponseDto(user);
+    }
+
+    @Override
+    public UserResponseDto getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return createUserResponseDto(user);
     }
 
     @Override
@@ -48,5 +61,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteAllUsers() {
         userRepository.deleteAll();
+    }
+
+    private UserResponseDto createUserResponseDto(User user) {
+        return UserResponseDto.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .build();
     }
 }
