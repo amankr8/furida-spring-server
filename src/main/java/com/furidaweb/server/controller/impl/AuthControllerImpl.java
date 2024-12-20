@@ -29,6 +29,9 @@ public class AuthControllerImpl implements AuthController {
 
     @Override
     public ResponseEntity<?> getAuthUser(Principal principal) {
+        if (principal == null) {
+            return ResponseEntity.ok(null);
+        }
         return ResponseEntity.ok(userService.getUserByUsername(principal.getName()));
     }
 
