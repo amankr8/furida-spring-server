@@ -1,8 +1,8 @@
 package com.furidaweb.server.controller;
 
 import com.furidaweb.server.dto.auth.UpdatePassDto;
-import com.furidaweb.server.dto.user.SignInUserDto;
-import com.furidaweb.server.dto.user.SignUpUserDto;
+import com.furidaweb.server.dto.auth.SignInUserDto;
+import com.furidaweb.server.dto.auth.SignUpUserDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

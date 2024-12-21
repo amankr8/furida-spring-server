@@ -1,4 +1,4 @@
-package com.furidaweb.server.dto.user;
+package com.furidaweb.server.dto.auth;
 
 import com.furidaweb.server.entity.Role;
 import jakarta.validation.constraints.Email;
@@ -20,7 +20,7 @@ public class SignUpUserDto {
     @Email(message = "Email should be valid")
     private String email;
 
-    @Size(min = 8, message = "Password must be at least 8 characters")
+    @NotBlank(message = "Password is required")
     private String password;
 
     @NotNull(message = "Role is required")
