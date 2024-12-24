@@ -6,9 +6,9 @@ import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.DocFileRepository;
 import com.furidaweb.server.service.CloudinaryService;
 import com.furidaweb.server.service.doc.DocFileService;
-import com.furidaweb.server.util.AppConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +22,13 @@ public class DocFileServiceImpl implements DocFileService {
     private final DocFileRepository docFileRepository;
     @Autowired
     private final CloudinaryService cloudinaryService;
-    private final String FOLDER_PATH = AppConstants.APP_NAME + "/documents";
+
+    @Value("${app.name}")
+    private String APP_NAME;
+
+    private String getFolderPath() {
+        return APP_NAME.concat("/documents");
+    }
 
     @Override
     public DocFile getDocFileByDocument(Document doc) {
@@ -32,7 +38,7 @@ public class DocFileServiceImpl implements DocFileService {
 
     @Override
     public void saveFile(MultipartFile file, Document doc) {
-        Map<String, String> fileDetails = cloudinaryService.uploadFile(file, FOLDER_PATH);
+        Map<String, String> fileDetails = cloudinaryService.uploadFile(file, getFolderPath());
         DocFile docFile = DocFile.builder()
                 .publicId(fileDetails.get("public_id"))
                 .url(fileDetails.get("url"))
@@ -53,7 +59,7 @@ public class DocFileServiceImpl implements DocFileService {
 
     @Override
     public void deleteAllDocFiles() {
-        cloudinaryService.deleteAllFilesInFolder(FOLDER_PATH);
+        cloudinaryService.deleteAllFilesInFolder(getFolderPath());
         docFileRepository.deleteAll();
     }
 }
