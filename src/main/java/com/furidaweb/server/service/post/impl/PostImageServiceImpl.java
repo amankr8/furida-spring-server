@@ -20,6 +20,7 @@ public class PostImageServiceImpl implements PostImageService {
 
     @Autowired
     private final PostImageRepository postImageRepository;
+
     @Autowired
     private final CloudinaryService cloudinaryService;
 
