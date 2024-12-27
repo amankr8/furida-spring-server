@@ -3,9 +3,11 @@ package com.furidaweb.server.service.project.impl;
 import com.furidaweb.server.entity.Project;
 import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.ProjectRepository;
+import com.furidaweb.server.service.doc.DocService;
 import com.furidaweb.server.service.project.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private final ProjectRepository projectRepository;
+
+    @Autowired
+    private final DocService docService;
 
     @Override
     public List<Project> getAllProjects() {
@@ -45,6 +50,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deleteProjectById(int id) {
+        // Check if project is linked to docs
+        if (!docService.getDocsByProject(id).isEmpty()) {
+            throw new DataIntegrityViolationException("Project is associated with uploaded documents");
+        }
+
         projectRepository.deleteById(id);
     }
 

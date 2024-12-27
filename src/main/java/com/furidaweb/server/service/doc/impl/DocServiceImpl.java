@@ -4,8 +4,10 @@ import com.furidaweb.server.dto.doc.DocRequestDto;
 import com.furidaweb.server.dto.doc.DocResponseDto;
 import com.furidaweb.server.entity.DocFile;
 import com.furidaweb.server.entity.Document;
+import com.furidaweb.server.entity.Project;
 import com.furidaweb.server.exception.ResourceNotFoundException;
 import com.furidaweb.server.repository.DocRepository;
+import com.furidaweb.server.repository.ProjectRepository;
 import com.furidaweb.server.service.doc.DocFileService;
 import com.furidaweb.server.service.doc.DocService;
 import com.furidaweb.server.service.project.ProjectService;
@@ -21,10 +23,12 @@ public class DocServiceImpl implements DocService {
 
     @Autowired
     private final DocRepository docRepository;
+
     @Autowired
     private final DocFileService docFileService;
+
     @Autowired
-    private final ProjectService projectService;
+    private final ProjectRepository projectRepository;
 
     @Override
     public List<DocResponseDto> getAllDocs() {
@@ -34,7 +38,10 @@ public class DocServiceImpl implements DocService {
 
     @Override
     public List<DocResponseDto> getDocsByProject(int projectId) {
-        List<Document> docs = docRepository.findByProject(projectService.getProjectById(projectId));
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("No project with id exists"));
+
+        List<Document> docs = docRepository.findByProject(project);
         return docs.stream().map(this::createDocResponseDto).toList();
     }
 
@@ -42,15 +49,19 @@ public class DocServiceImpl implements DocService {
     public DocResponseDto getDocById(int id) {
         Document doc = docRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Document not found"));
+
         return createDocResponseDto(doc);
     }
 
     @Override
     public DocResponseDto createDoc(DocRequestDto docDto) {
+        Project project = projectRepository.findById(docDto.getProjectId())
+                .orElseThrow(() -> new ResourceNotFoundException("No project with id exists"));
+
         Document newDoc = Document.builder()
                 .name(docDto.getName())
                 .desc(docDto.getDesc())
-                .project(projectService.getProjectById(docDto.getProjectId()))
+                .project(project)
                 .build();
 
         Document savedDoc = docRepository.save(newDoc);
