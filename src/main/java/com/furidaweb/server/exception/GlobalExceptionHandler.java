@@ -1,5 +1,6 @@
 package com.furidaweb.server.exception;
 import com.furidaweb.server.dto.StatusResponse;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,6 +27,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleNullPointerExceptionException(Exception e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new StatusResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<?> handleDataIntegrityViolationExceptionException(Exception e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new StatusResponse(HttpStatus.FORBIDDEN.value(), e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
