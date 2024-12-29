@@ -11,14 +11,13 @@ spring:
     baseline-on-migrate: true
     validate-on-migrate: true
 
-  # Hibernate ddl-auto automatically validates or exports schema DDL to the database when the SessionFactory is created.
   jpa:
     show-sql: true
     properties:
       hibernate:
         format_sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     defer-datasource-initialization: true
 
   sql:
