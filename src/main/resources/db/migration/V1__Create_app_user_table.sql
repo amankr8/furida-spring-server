@@ -1,8 +1,8 @@
--- V1__Create_user_table.sql
+-- Create the app_user table
 CREATE TABLE app_user (
     u_id SERIAL PRIMARY KEY,
     u_username VARCHAR(255) NOT NULL,
     u_email VARCHAR(255) NOT NULL,
     u_password VARCHAR(255) NOT NULL,
-    u_role VARCHAR(50) NOT NULL
+    u_role VARCHAR(255) NOT NULL CHECK (u_role IN ('EDITOR', 'ADMIN'))
 );
