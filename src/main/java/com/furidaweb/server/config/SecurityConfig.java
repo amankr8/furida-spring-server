@@ -48,7 +48,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://furida.netlify.app","https://furida.in","https://furida.org"));
+        configuration.setAllowedOriginPatterns(List.of("https://*.netlify.app"));
+        configuration.setAllowedOrigins(List.of("https://furida.in"));
         configuration.setAllowedMethods(List.of("GET","PUT","POST","DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 
