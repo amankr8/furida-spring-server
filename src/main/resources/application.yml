@@ -1,36 +1,20 @@
 spring:
+  app:
+    name: ${APP_NAME}
+
+  profiles:
+      active: prod
+
   datasource:
     url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
-  flyway:
-    enabled: true
-    locations: classpath:db/migration
-    baseline-on-migrate: true
-    validate-on-migrate: true
-
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-    hibernate:
-      ddl-auto: none
-    defer-datasource-initialization: false
-
-    sql:
-      init:
-        mode: always
-
   servlet:
     multipart:
       max-file-size: 2MB     # Maximum size of a single uploaded file
       max-request-size: 10MB # Maximum size of a complete request (all files + form data)
-
-app:
-  name: ${APP_NAME}
 
 jwt:
   secret: ${JWT_SECRET}
