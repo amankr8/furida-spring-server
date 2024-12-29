@@ -18,6 +18,11 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: none
+    defer-datasource-initialization: false
+
+    sql:
+      init:
+        mode: always
 
   servlet:
     multipart:
