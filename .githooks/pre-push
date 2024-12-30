@@ -3,7 +3,7 @@ LC_ALL=C
 
 # Validate branch name
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
-valid_branch_regex="^(feature|bugfix|task)\/fwa-[0-9]+$"
+valid_branch_regex="^(feature|bugfix|task)/fwa-[0-9]+$"
 
 branch_message_error="Invalid branch name. Branch names must adhere to this contract: $valid_branch_regex. Your commit will be rejected. Please rename your branch and try again."
 
