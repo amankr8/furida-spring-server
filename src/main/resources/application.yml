@@ -1,30 +1,20 @@
 spring:
+  app:
+    name: ${APP_NAME}
+
+  profiles:
+      active: prod
+
   datasource:
     url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-
-  # Hibernate ddl-auto automatically validates or exports schema DDL to the database when the SessionFactory is created.
-  jpa:
-    show-sql: false
-    properties:
-      hibernate:
-        format_sql: true
-    hibernate:
-      ddl-auto: update
-    defer-datasource-initialization: true
-
-  sql:
-    init:
-      mode: always
+    driver-class-name: org.postgresql.Driver
 
   servlet:
     multipart:
       max-file-size: 2MB     # Maximum size of a single uploaded file
       max-request-size: 10MB # Maximum size of a complete request (all files + form data)
-
-app:
-  name: ${APP_NAME}
 
 jwt:
   secret: ${JWT_SECRET}
