@@ -5,10 +5,10 @@ LC_ALL=C
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(feature|bugfix|task)\/fwa-[0-9]+$"
 
-branch_message="Invalid branch name. Branch names must adhere to this contract: $valid_branch_regex. Your commit will be rejected. Please rename your branch and try again."
+branch_message_error="Invalid branch name. Branch names must adhere to this contract: $valid_branch_regex. Your commit will be rejected. Please rename your branch and try again."
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]; then
-    echo "$branch_message"
+    echo "$branch_message_error"
     exit 1
 fi
 
