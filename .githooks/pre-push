@@ -1,16 +1,21 @@
 #!/usr/bin/env bash
 LC_ALL=C
 
+# Get the current branch name
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 
-valid_branch_regex="^(feature|bugfix|task)\/[a-z0-9._-]+$"
+# Define the regex for valid branch names
+valid_branch_regex="^(feature|bugfix|task)\/fwa-\d+$"
 
-message="There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. Your commit will be rejected. You should rename your branch to a valid name and try again."
+# Define the error message
+message="ERROR: Invalid branch name '$local_branch'. Branch names must follow this pattern: $valid_branch_regex.
+Examples: feature/fwa-123, bugfix/fwa-456, task/fwa-789. Please rename your branch and try again."
 
-if [[ ! $local_branch =~ $valid_branch_regex ]]
-then
+# Check if the branch name matches the valid pattern
+if [[ ! $local_branch =~ $valid_branch_regex ]]; then
     echo "$message"
     exit 1
 fi
 
+echo "Branch name '$local_branch' is valid. Push allowed."
 exit 0
