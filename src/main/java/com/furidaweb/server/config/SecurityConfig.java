@@ -49,7 +49,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(List.of("https://*.netlify.app","https://*.vercel.app"));
-        configuration.setAllowedOrigins(List.of("https://furida.in"));
+        configuration.setAllowedOrigins(List.of("https://www.furida.in","https://furida.in"));
         configuration.setAllowedMethods(List.of("GET","PUT","POST","DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 
