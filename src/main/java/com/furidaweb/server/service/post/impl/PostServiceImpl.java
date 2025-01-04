@@ -62,7 +62,6 @@ public class PostServiceImpl implements PostService {
 
         post.setTitle(postDto.getTitle());
         post.setContent(postDto.getContent());
-        post.setDate(new Date());
 
         return createPostResponseDto(postRepository.save(post));
     }
