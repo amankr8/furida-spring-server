@@ -31,15 +31,15 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Message sendMessage(Message msg) {
         msg.setDate(new Date());
-        msg.setRead(false);
+        msg.setArchive(false);
 
         return messageRepository.save(msg);
     }
 
     @Override
-    public Message toggleReadStatusById(int id) {
+    public Message toggleArchiveById(int id) {
         Message msg = messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
-        msg.setRead(!msg.getRead());
+        msg.setArchive(!msg.getArchive());
 
         return messageRepository.save(msg);
     }

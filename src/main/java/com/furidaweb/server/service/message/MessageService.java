@@ -12,7 +12,7 @@ public interface MessageService {
 
     Message sendMessage(Message msg);
 
-    Message toggleReadStatusById(int id);
+    Message toggleArchiveById(int id);
 
     void deleteMessageById(int id);
 
