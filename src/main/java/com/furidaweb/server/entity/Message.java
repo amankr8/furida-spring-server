@@ -33,6 +33,6 @@ public class Message {
     @Column(name = "m_date")
     private Date date;
 
-    @Column(name = "m_read")
-    private Boolean read;
+    @Column(name = "m_archive")
+    private Boolean archive;
 }

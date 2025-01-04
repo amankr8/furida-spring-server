@@ -33,8 +33,8 @@ public class MessageControllerImpl implements MessageController {
     }
 
     @Override
-    public ResponseEntity<?> toggleReadStatus(int id) {
-        return ResponseEntity.ok(messageService.toggleReadStatusById(id));
+    public ResponseEntity<?> toggleArchive(int id) {
+        return ResponseEntity.ok(messageService.toggleArchiveById(id));
     }
 
     @Override
