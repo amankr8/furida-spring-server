@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -27,4 +29,7 @@ public class Project {
 
     @Column(name = "pj_address")
     private String address;
+
+    @Column(name = "pj_create_date")
+    private Date createDate;
 }

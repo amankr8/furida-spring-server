@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -24,6 +26,9 @@ public class Document {
 
     @Column(name = "d_desc")
     private String desc;
+
+    @Column(name = "d_create_date")
+    private Date createDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pj_id")

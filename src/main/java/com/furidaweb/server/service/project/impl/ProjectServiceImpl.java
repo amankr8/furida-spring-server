@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -34,6 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project addProject(Project project) {
+        project.setCreateDate(new Date());
         return projectRepository.save(project);
     }
 

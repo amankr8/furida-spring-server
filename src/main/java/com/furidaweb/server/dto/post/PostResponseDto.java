@@ -17,5 +17,5 @@ public class PostResponseDto {
     private String title;
     private String content;
     private String imgUrl;
-    private Date date;
+    private Date createDate;
 }

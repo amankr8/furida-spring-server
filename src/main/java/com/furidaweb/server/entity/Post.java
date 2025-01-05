@@ -24,6 +24,6 @@ public class Post {
     @Column(name = "p_content", length = 510)
     private String content;
 
-    @Column(name = "p_date")
-    private Date date;
+    @Column(name = "p_create_date")
+    private Date createDate;
 }

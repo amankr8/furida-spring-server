@@ -30,8 +30,8 @@ public class Message {
     @Column(name = "m_msg", length = 510)
     private String msg;
 
-    @Column(name = "m_date")
-    private Date date;
+    @Column(name = "m_send_date")
+    private Date sendDate;
 
     @Column(name = "m_archive")
     private Boolean archive;
