@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,5 +17,6 @@ public class DocResponseDto {
     private String name;
     private String desc;
     private String docUrl;
+    private Date date;
     private int projectId;
 }

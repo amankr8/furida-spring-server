@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -61,6 +62,7 @@ public class DocServiceImpl implements DocService {
                 .name(docDto.getName())
                 .desc(docDto.getDesc())
                 .project(project)
+                .createDate(new Date())
                 .build();
 
         Document savedDoc = docRepository.save(newDoc);
@@ -104,6 +106,7 @@ public class DocServiceImpl implements DocService {
                 .desc(doc.getDesc())
                 .docUrl(docFile.getUrl())
                 .projectId(doc.getProject().getId())
+                .date(doc.getCreateDate())
                 .build();
     }
 }

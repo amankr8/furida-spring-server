@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @RequiredArgsConstructor
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -40,6 +42,7 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(input.getEmail());
         user.setUsername(input.getUsername());
         user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setCreateDate(new Date());
         user.setRole(input.getRole());
 
         return userRepository.save(user);
