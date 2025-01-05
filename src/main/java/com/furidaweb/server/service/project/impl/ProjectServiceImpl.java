@@ -25,7 +25,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getAllProjects() {
-        return projectRepository.findAll();
+        return projectRepository.findAll().stream()
+                .sorted((p1, p2) -> p2.getCreateDate().compareTo(p1.getCreateDate()))
+                .toList();
     }
 
     @Override
