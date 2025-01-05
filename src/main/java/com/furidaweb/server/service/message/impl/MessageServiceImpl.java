@@ -20,7 +20,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> getAllMessages() {
-        return messageRepository.findAll();
+        return messageRepository.findAll().stream()
+                .sorted((m1, m2) -> m2.getSendDate().compareTo(m1.getSendDate()))
+                .toList();
     }
 
     @Override

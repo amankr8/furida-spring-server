@@ -27,6 +27,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostResponseDto> getAllPosts() {
         return postRepository.findAll().stream()
+                .sorted((p1, p2) -> p2.getCreateDate().compareTo(p1.getCreateDate()))
                 .map(this::createPostResponseDto)
                 .toList();
     }

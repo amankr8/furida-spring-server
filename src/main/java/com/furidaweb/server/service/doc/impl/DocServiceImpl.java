@@ -33,7 +33,9 @@ public class DocServiceImpl implements DocService {
     @Override
     public List<DocResponseDto> getAllDocs() {
         return docRepository.findAll()
-                .stream().map(this::createDocResponseDto).toList();
+                .stream()
+                .sorted((d1, d2) -> d2.getCreateDate().compareTo(d1.getCreateDate()))
+                .map(this::createDocResponseDto).toList();
     }
 
     @Override
@@ -42,7 +44,9 @@ public class DocServiceImpl implements DocService {
                 .orElseThrow(() -> new ResourceNotFoundException("No project with id exists"));
 
         List<Document> docs = docRepository.findByProject(project);
-        return docs.stream().map(this::createDocResponseDto).toList();
+        return docs.stream()
+                .sorted((d1, d2) -> d2.getCreateDate().compareTo(d1.getCreateDate()))
+                .map(this::createDocResponseDto).toList();
     }
 
     @Override
