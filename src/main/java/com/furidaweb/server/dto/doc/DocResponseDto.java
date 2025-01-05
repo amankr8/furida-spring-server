@@ -17,6 +17,6 @@ public class DocResponseDto {
     private String name;
     private String desc;
     private String docUrl;
-    private Date date;
+    private Date createDate;
     private int projectId;
 }

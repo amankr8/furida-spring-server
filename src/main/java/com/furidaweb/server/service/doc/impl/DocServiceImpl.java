@@ -106,7 +106,7 @@ public class DocServiceImpl implements DocService {
                 .desc(doc.getDesc())
                 .docUrl(docFile.getUrl())
                 .projectId(doc.getProject().getId())
-                .date(doc.getCreateDate())
+                .createDate(doc.getCreateDate())
                 .build();
     }
 }

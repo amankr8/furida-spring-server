@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .role(user.getRole())
-                .date(user.getCreateDate())
+                .createDate(user.getCreateDate())
                 .build();
     }
 }

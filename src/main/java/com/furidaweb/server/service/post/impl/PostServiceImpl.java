@@ -95,7 +95,7 @@ public class PostServiceImpl implements PostService {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .imgUrl(imgUrls.get(0))
-                .date(post.getCreateDate())
+                .createDate(post.getCreateDate())
                 .build();
     }
 }
