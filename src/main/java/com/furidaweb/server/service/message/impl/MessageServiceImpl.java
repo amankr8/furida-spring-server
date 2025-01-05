@@ -30,7 +30,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Message sendMessage(Message msg) {
-        msg.setDate(new Date());
+        msg.setSendDate(new Date());
         msg.setArchive(false);
 
         return messageRepository.save(msg);

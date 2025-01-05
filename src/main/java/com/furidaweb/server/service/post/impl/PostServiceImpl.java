@@ -42,7 +42,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponseDto createPost(PostRequestDto postDto) {
         Post newPost = Post.builder()
-                .date(new Date())
+                .createDate(new Date())
                 .title(postDto.getTitle())
                 .content(postDto.getContent())
                 .build();
@@ -95,7 +95,7 @@ public class PostServiceImpl implements PostService {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .imgUrl(imgUrls.get(0))
-                .date(post.getDate())
+                .date(post.getCreateDate())
                 .build();
     }
 }
