@@ -1,14 +1,29 @@
-# Use the OpenJDK 17 slim base image
-FROM openjdk:17-jdk-slim
+# Use a valid Maven image with OpenJDK 17
+FROM maven:3.8.8-eclipse-temurin-17 AS build
 
-# Create and change to the app directory.
-WORKDIR /app
+# Set the working directory
+WORKDIR /server
 
-# Copy local code to the container image.
-COPY . ./
+# Copy the Maven wrapper and project files
+COPY . .
 
-# Build the app.
+# Grant execute permission to the Maven wrapper
+RUN chmod +x ./mvnw
+
+# Run Maven to build the application
 RUN ./mvnw -DoutputFile=target/mvn-dependency-list.log -B -DskipTests clean dependency:list install
 
-# Run the app by dynamically finding the JAR file in the target directory
-CMD ["sh", "-c", "java -jar target/*.jar"]
+# Use an official OpenJDK image as the base for the runtime
+FROM eclipse-temurin:17-jdk
+
+# Set the working directory
+WORKDIR /server
+
+# Copy the JAR file from the build stage
+COPY --from=build /server/target/*.jar app.jar
+
+# Expose the application port
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
