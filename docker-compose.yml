@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   app:
-    image: 'docker-spring-boot-postgres:latest'
+    image: 'furida-spring-boot:latest'
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app_server
+    container_name: furida_server
     ports:
       - "8080:8080"
     environment:
