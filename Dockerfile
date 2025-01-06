@@ -1,14 +1,14 @@
 # Use the OpenJDK 17 slim base image
 FROM openjdk:17-jdk-slim
 
-# Set the working directory
+# Create and change to the app directory.
 WORKDIR /app
 
-# Copy the Spring Boot JAR file into the container
-COPY target/server-0.0.1-SNAPSHOT.jar app.jar
+# Copy local code to the container image.
+COPY . ./
 
-# Expose the application's port
-EXPOSE 8080
+# Build the app.
+RUN ./mvnw -DoutputFile=target/mvn-dependency-list.log -B -DskipTests clean dependency:list install
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the app by dynamically finding the JAR file in the target directory
+CMD ["sh", "-c", "java -jar target/*.jar"]
