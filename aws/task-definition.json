@@ -1,6 +1,6 @@
 {
     "taskDefinition": {
-        "taskDefinitionArn": "arn:aws:ecs:us-east-1:593793025712:task-definition/FuridaTaskDefinition:3",
+        "taskDefinitionArn": "arn:aws:ecs:us-east-1:593793025712:task-definition/FuridaTaskDefinition:4",
         "containerDefinitions": [
             {
                 "name": "furida-server",
@@ -8,8 +8,8 @@
                 "cpu": 0,
                 "portMappings": [
                     {
-                        "containerPort": 80,
-                        "hostPort": 80,
+                        "containerPort": 8080,
+                        "hostPort": 8080,
                         "protocol": "tcp",
                         "name": "furida-server-80-tcp",
                         "appProtocol": "http"
@@ -44,7 +44,7 @@
         "family": "FuridaTaskDefinition",
         "executionRoleArn": "arn:aws:iam::593793025712:role/ecsTaskExecutionRole",
         "networkMode": "awsvpc",
-        "revision": 3,
+        "revision": 4,
         "volumes": [],
         "status": "ACTIVE",
         "requiresAttributes": [
@@ -93,7 +93,7 @@
         ],
         "cpu": "1024",
         "memory": "3072",
-        "registeredAt": "2025-01-07T12:59:56.562000+05:30",
+        "registeredAt": "2025-01-07T13:04:45.406000+05:30",
         "registeredBy": "arn:aws:iam::593793025712:root",
         "enableFaultInjection": false
     },
