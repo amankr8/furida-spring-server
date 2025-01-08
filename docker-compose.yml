@@ -1,6 +1,6 @@
 services:
   app:
-    image: 'furida-spring-boot:latest'
+    image: 'furida-server:latest'
     build:
       context: .
       dockerfile: Dockerfile
@@ -20,7 +20,7 @@ services:
       - db
 
   db:
-    image: 'postgres:latest'
+    image: 'postgres:17'
     container_name: postgres_db
     ports:
       - "5432:5432"
