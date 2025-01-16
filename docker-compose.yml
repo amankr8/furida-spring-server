@@ -1,15 +1,16 @@
 services:
   app:
-    image: 'furida-server:latest'
+    image: 'amankr08/furida-server:latest'
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: furida_server
+    container_name: springboot_app
     ports:
       - "8080:8080"
     environment:
+      SPRING_PROFILES_ACTIVE: dev
       APP_NAME: ${APP_NAME}
-      SPRING_DATASOURCE_URL: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/${DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
