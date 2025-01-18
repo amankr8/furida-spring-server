@@ -1,7 +1,6 @@
 package com.furidaweb.server.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,9 +20,7 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
     private final AuthenticationProvider authenticationProvider;
-    @Autowired
     private final JwtAuthFilter jwtAuthFilter;
 
     @Bean
@@ -48,7 +45,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("https://*.netlify.app","https://*.vercel.app"));
+        configuration.setAllowedOriginPatterns(List.of("https://*.netlify.app","https://*.vercel.app","https://*.onrender.com"));
         configuration.setAllowedOrigins(List.of("http://localhost:4200","https://furida.in"));
         configuration.setAllowedMethods(List.of("GET","PUT","POST","DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
