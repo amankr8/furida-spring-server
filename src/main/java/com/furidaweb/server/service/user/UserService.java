@@ -18,4 +18,6 @@ public interface UserService {
     void deleteUserById(String username, int id);
 
     void deleteAllUsers();
+
+    UserResponseDto createUserResponseDto(User user);
 }

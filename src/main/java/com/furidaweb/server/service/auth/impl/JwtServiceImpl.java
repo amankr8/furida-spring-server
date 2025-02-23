@@ -42,12 +42,12 @@ public class JwtServiceImpl implements JwtService {
 
     private String buildToken(
             Map<String, Object> extraClaims,
-            UserDetails userDetails,
+            String username,
             long expiration) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
@@ -55,14 +55,14 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateToken(String username) {
+        return generateToken(new HashMap<>(), username);
     }
 
     @Override
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public String generateToken(Map<String, Object> extraClaims, String username) {
         long jwtExpiration = 1000L * 60 * 60 * 24;
-        return buildToken(extraClaims, userDetails, jwtExpiration);
+        return buildToken(extraClaims, username, jwtExpiration);
     }
 
     @Override
@@ -71,9 +71,9 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public Boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    public Boolean isTokenValid(String token, String username) {
+        final String subject = extractUsername(token);
+        return (subject.equals(username)) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
