@@ -3,9 +3,11 @@ package com.furidaweb.server.service.auth.impl;
 import com.furidaweb.server.dto.auth.UpdatePassDto;
 import com.furidaweb.server.dto.auth.SignInUserDto;
 import com.furidaweb.server.dto.auth.SignUpUserDto;
+import com.furidaweb.server.dto.user.UserResponseDto;
 import com.furidaweb.server.entity.User;
 import com.furidaweb.server.repository.UserRepository;
 import com.furidaweb.server.service.auth.AuthService;
+import com.furidaweb.server.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,11 +22,12 @@ import java.util.Date;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public User signUp(SignUpUserDto input) {
+    public UserResponseDto signUp(SignUpUserDto input) {
         // Check if the user already exists by username or email
         if (userRepository.findByUsername(input.getUsername()).isPresent()) {
             throw new IllegalArgumentException("Username already exists");
@@ -41,11 +44,11 @@ public class AuthServiceImpl implements AuthService {
         user.setCreateDate(new Date());
         user.setRole(input.getRole());
 
-        return userRepository.save(user);
+        return userService.createUserResponseDto(userRepository.save(user));
     }
 
     @Override
-    public User signIn(SignInUserDto input) {
+    public UserResponseDto signIn(SignInUserDto input) {
         User user = userRepository.findByUsername(input.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
@@ -55,7 +58,7 @@ public class AuthServiceImpl implements AuthService {
                     input.getPassword()
             )
         );
-        return user;
+        return userService.createUserResponseDto(user);
     }
 
     @Override

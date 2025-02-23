@@ -65,7 +65,8 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteAll();
     }
 
-    private UserResponseDto createUserResponseDto(User user) {
+    @Override
+    public UserResponseDto createUserResponseDto(User user) {
         return UserResponseDto.builder()
                 .id(user.getId())
                 .username(user.getUsername())
