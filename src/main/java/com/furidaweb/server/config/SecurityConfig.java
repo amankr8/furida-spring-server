@@ -43,7 +43,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(List.of("https://*.netlify.app","https://*.vercel.app","https://*.onrender.com"));
-        configuration.setAllowedOrigins(List.of("http://localhost:4200","https://furida.org"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200","https://furida.org","https://furida.in"));
         configuration.setAllowedMethods(List.of("GET","PUT","POST","DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 
